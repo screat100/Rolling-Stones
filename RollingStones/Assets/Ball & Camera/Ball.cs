@@ -14,7 +14,7 @@ public class Ball : MonoBehaviour
     // power는 버튼 누름에 따른 이동 강도를 결정
     Vector3 ballForward;
     Vector3 ballRight;
-    float power = 0.1f;
+    float power = 0.125f;
 
     // 공은 바닥에 붙어있을 때에만 점프할 수 있음
     bool canJump;
