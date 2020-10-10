@@ -412,8 +412,8 @@ GameObject:
   - component: {fileID: 560657339}
   - component: {fileID: 560657338}
   - component: {fileID: 560657337}
-  - component: {fileID: 560657341}
   - component: {fileID: 560657342}
+  - component: {fileID: 560657341}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -504,10 +504,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 560657336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed33e4dd64e616844b01aaa619019fd4, type: 3}
+  m_Script: {fileID: 11500000, guid: f327e142df65b0d4d8d3a441eeda71f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 963194227}
+  cam: {fileID: 963194225}
 --- !u!54 &560657342
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1024,8 +1024,8 @@ Camera:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.13737094, g: 0.1981132, b: 0.1599253, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1065,8 +1065,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -44.7, y: 90, z: -150}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 60.3, z: -28.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbf6340b28778e24dbb2765b1d351072, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ec2d170fc9da56498ac6cda2c558e8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 560657336}
