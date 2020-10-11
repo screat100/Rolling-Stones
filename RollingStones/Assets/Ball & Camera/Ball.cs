@@ -46,6 +46,8 @@ public class Ball : MonoBehaviour
         if (other.gameObject.tag == "door")
         {
             Debug.Log("쾅! " + damage);
+            // 속도비례 데미지 주기!
+            other.gameObject.GetComponent<DoorStat>().DoorTakeDamage(damage);
 
             // 시작지점으로 복귀
             gameObject.transform.position = startPos;

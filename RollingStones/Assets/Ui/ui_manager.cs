@@ -33,4 +33,5 @@ public class ui_manager : MonoBehaviour
         TimeUI.text = ((int)time / 60).ToString() +":"+ timeStr;
         Speed.text = System.Math.Truncate(GameObject.Find("Player").GetComponent<Rigidbody>().velocity.magnitude).ToString();
     }
+
 }

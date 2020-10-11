@@ -57,7 +57,9 @@
   <ItemGroup>
      <Compile Include="Assets\Ball &amp; Camera\Ball.cs" />
      <Compile Include="Assets\Ball &amp; Camera\Camera.cs" />
+     <Compile Include="Assets\Door\Scripts\DoorStat.cs" />
      <Compile Include="Assets\MenuScene.cs" />
+     <Compile Include="Assets\Ui\DoorHPSlider.cs" />
      <Compile Include="Assets\Ui\ui_manager.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/김근남/Desktop/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
