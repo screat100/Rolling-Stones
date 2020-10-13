@@ -84,7 +84,6 @@ public class Ball : MonoBehaviour
         // 점프
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
-            //rb.AddForce(new Vector3(0, 1, 0) * 400);
             rb.velocity += new Vector3(0, 5, 0);
             canJump = false;
         }
@@ -106,7 +105,7 @@ public class Ball : MonoBehaviour
         ballRight.y = 0;
 
         // 전진 관련
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && canJump)
         {
 
             // 앞+좌
@@ -132,7 +131,7 @@ public class Ball : MonoBehaviour
 
 
         // 후진 관련
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S) && canJump)
         {
             // 후+좌
             if (Input.GetKey(KeyCode.A))
@@ -156,13 +155,13 @@ public class Ball : MonoBehaviour
         }
 
         // 좌
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A) && canJump)
         {
             rb.velocity -= ballRight * power;
         }
 
         // 우
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) && canJump)
         {
             rb.velocity += ballRight * power;
         }
