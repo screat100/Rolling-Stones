@@ -7,7 +7,6 @@ TagManager:
   - ground
   - fall
   - door
-  - wall
   layers:
   - Default
   - TransparentFX

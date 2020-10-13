@@ -49,19 +49,25 @@ public class Ball : MonoBehaviour
             // 속도비례 데미지 주기!
             other.gameObject.GetComponent<DoorStat>().DoorTakeDamage(damage);
 
+<<<<<<< HEAD
             SoundManager.Instance.PlayDoorSound(); //성문 부딪혔을 때 재생
 
+=======
+>>>>>>> parent of 2d773ae... 사운드추가
             // 시작지점으로 복귀
             gameObject.transform.position = startPos;
             rb.velocity = new Vector3(0, 0, 0);
             rb.angularVelocity = new Vector3(0, 0, 0);
         }
 
+<<<<<<< HEAD
         if (other.gameObject.tag == "wall")
         {
             SoundManager.Instance.PlayWallSound();
         }
 
+=======
+>>>>>>> parent of 2d773ae... 사운드추가
 
     }
 
@@ -79,7 +85,6 @@ public class Ball : MonoBehaviour
         // 추락지역에 떨어지면 최초 시작지점으로 이동
         if (other.gameObject.tag == "fall")
         {
-            SoundManager.Instance.PlayFallSound();
             Debug.Log("Falled !");
             gameObject.transform.position = startPos;
             rb.velocity = new Vector3(0, 0, 0);
@@ -95,8 +100,6 @@ public class Ball : MonoBehaviour
             //rb.AddForce(new Vector3(0, 1, 0) * 400);
             rb.velocity += new Vector3(0, 5, 0);
             canJump = false;
-
-            SoundManager.Instance.PlayJumpSound(); //점프할 때 재생
         }
 
         //speed = rb.velocity.z;
