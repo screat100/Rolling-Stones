@@ -14,7 +14,7 @@ public class Ball : MonoBehaviour
     // power는 버튼 누름에 따른 이동 강도를 결정
     Vector3 ballForward;
     Vector3 ballRight;
-    float power = 0.125f;
+    float power = 0.25f;
 
     // 공은 바닥에 붙어있을 때에만 점프할 수 있음
     bool canJump;
@@ -99,38 +99,71 @@ public class Ball : MonoBehaviour
          * RigidBody의 AddForce를 사용하여 카메라가 바라보는 방향을 기준으로 W/A/S/D키를 눌렀을 때 전/좌/후/우 방향으로 가속도 부여
          * SpaceBar 입력시 y축 방향으로 AddForce
          */
-
         ballForward = cam.transform.forward;
         ballRight = cam.transform.right;
 
         ballForward.y = 0;
         ballRight.y = 0;
 
-        // 전진
+        // 전진 관련
         if (Input.GetKey(KeyCode.W))
         {
-            //rb.AddForce(cam.transform.forward * power);
-            rb.velocity += ballForward * power;
+
+            // 앞+좌
+            if (Input.GetKey(KeyCode.A))
+            {
+                rb.velocity += ballForward * power * 0.5f;
+                rb.velocity -= ballRight * power * 0.5f;
+            }
+
+            // 앞+우
+            else if (Input.GetKey(KeyCode.D))
+            {
+                rb.velocity += ballForward * power * 0.5f;
+                rb.velocity += ballRight * power * 0.5f;
+            }
+
+            // 앞
+            else
+            {
+                rb.velocity += ballForward * power;
+            }
         }
 
-        // 후진
-        if (Input.GetKey(KeyCode.S))
+
+        // 후진 관련
+        else if (Input.GetKey(KeyCode.S))
         {
-            //rb.AddForce(-cam.transform.forward * power);
-            rb.velocity -= ballForward * power;
+            // 후+좌
+            if (Input.GetKey(KeyCode.A))
+            {
+                rb.velocity -= ballForward * power * 0.5f;
+                rb.velocity -= ballRight * power * 0.5f;
+            }
+
+            // 후+우
+            else if (Input.GetKey(KeyCode.D))
+            {
+                rb.velocity -= ballForward * power * 0.5f;
+                rb.velocity += ballRight * power * 0.5f;
+            }
+
+            // 후진
+            else
+            {
+                rb.velocity -= ballForward * power;
+            }
         }
 
-        // 좌로 굴러
-        if (Input.GetKey(KeyCode.A))
+        // 좌
+        else if (Input.GetKey(KeyCode.A))
         {
-            //rb.AddForce(-cam.transform.right * power);
             rb.velocity -= ballRight * power;
         }
 
-        // 우로 굴러
-        if (Input.GetKey(KeyCode.D))
+        // 우
+        else if (Input.GetKey(KeyCode.D))
         {
-            //rb.AddForce(cam.transform.right * power);
             rb.velocity += ballRight * power;
         }
 
