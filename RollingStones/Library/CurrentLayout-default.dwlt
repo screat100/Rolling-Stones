@@ -22,11 +22,15 @@ MonoBehaviour:
 <<<<<<< HEAD
   m_Title: Hierarchy
   m_RootView: {fileID: 2}
+<<<<<<< HEAD
 =======
   m_Title: 
   m_RootView: {fileID: 6}
 >>>>>>> parent of 2d773ae... 사운드추가
   m_MinSize: {x: 875, y: 300}
+=======
+  m_MinSize: {x: 875, y: 392}
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -50,9 +54,15 @@ MonoBehaviour:
     x: 0
 <<<<<<< HEAD
     y: 0
+<<<<<<< HEAD
     width: 1536
     height: 781
   m_MinSize: {x: 875, y: 300}
+=======
+    width: 1920
+    height: 997
+  m_MinSize: {x: 875, y: 392}
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
@@ -165,6 +175,7 @@ MonoBehaviour:
     x: 0
 <<<<<<< HEAD
     y: 30
+<<<<<<< HEAD
     width: 1536
     height: 731
   m_MinSize: {x: 679, y: 492}
@@ -184,6 +195,14 @@ MonoBehaviour:
   m_Selected: 1
   m_LastSelected: 0
 >>>>>>> parent of 2d773ae... 사운드추가
+=======
+    width: 1920
+    height: 947
+  m_MinSize: {x: 679, y: 342}
+  m_MaxSize: {x: 12004, y: 8042}
+  vertical: 0
+  controlID: 629
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -204,6 +223,7 @@ MonoBehaviour:
     x: 0
     y: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 1061
     height: 731
   m_MinSize: {x: 403, y: 492}
@@ -216,6 +236,14 @@ MonoBehaviour:
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 >>>>>>> parent of 2d773ae... 사운드추가
+=======
+    width: 1531
+    height: 947
+  m_MinSize: {x: 403, y: 342}
+  m_MaxSize: {x: 8003, y: 8042}
+  vertical: 1
+  controlID: 549
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -282,12 +310,21 @@ MonoBehaviour:
     x: 0
     y: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 1061
     height: 442
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
   controlID: 21
+=======
+    width: 1531
+    height: 573
+  m_MinSize: {x: 403, y: 221}
+  m_MaxSize: {x: 8003, y: 4021}
+  vertical: 0
+  controlID: 550
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
 --- !u!114 &8
 =======
     width: 2041
@@ -315,8 +352,13 @@ MonoBehaviour:
     x: 0
     y: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 346
     height: 442
+=======
+    width: 379
+    height: 573
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
@@ -343,7 +385,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SceneView
+  m_Name: GameView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -351,21 +393,26 @@ MonoBehaviour:
     x: 505
     y: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 715
     height: 442
 =======
     width: 1536
     height: 791
 >>>>>>> parent of 2d773ae... 사운드추가
+=======
+    width: 1152
+    height: 573
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 14}
+  m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 14}
   - {fileID: 12}
   - {fileID: 15}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -376,7 +423,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
 <<<<<<< HEAD
   m_Children: []
@@ -393,17 +440,26 @@ MonoBehaviour:
 >>>>>>> parent of 2d773ae... 사운드추가
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 442
     width: 1061
     height: 289
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
   m_ActualView: {fileID: 16}
+=======
+    y: 573
+    width: 1531
+    height: 374
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 17}
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
   m_Panes:
   - {fileID: 16}
   - {fileID: 17}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -585,10 +641,17 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 346.4
     y: 73.6
     width: 713
     height: 421
+=======
+    x: 379
+    y: 73
+    width: 1150
+    height: 552
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
   m_ViewDataDictionary: {fileID: 0}
   m_SerializedViewNames: []
   m_SerializedViewValues: []
@@ -596,12 +659,20 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
+<<<<<<< HEAD
   m_TargetSize: {x: 711, y: 400}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
   m_MaximizeOnPlay: 0
   m_UseMipMap: 0
+=======
+  m_TargetSize: {x: 944, y: 531}
+  m_TextureFilterMode: 0
+  m_TextureHideFlags: 61
+  m_RenderIMGUI: 1
+  m_MaximizeOnPlay: 1
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
   m_VSyncEnabled: 0
   m_Gizmos: 0
   m_Stats: 0
@@ -611,10 +682,17 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
+<<<<<<< HEAD
     m_HBaseRangeMin: -284.4
     m_HBaseRangeMax: 284.4
     m_VBaseRangeMin: -160
     m_VBaseRangeMax: 160
+=======
+    m_HBaseRangeMin: -472
+    m_HBaseRangeMax: 472
+    m_VBaseRangeMin: -265.5
+    m_VBaseRangeMax: 265.5
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -623,7 +701,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -632,16 +710,24 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
+<<<<<<< HEAD
       width: 713
       height: 400
     m_Scale: {x: 1, y: 1}
     m_Translation: {x: 356.5, y: 200}
+=======
+      width: 1150
+      height: 531
+    m_Scale: {x: 1, y: 1}
+    m_Translation: {x: 575, y: 265.5}
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
+<<<<<<< HEAD
       x: -356.5
       y: -200
       width: 713
@@ -649,6 +735,15 @@ MonoBehaviour:
     m_MinimalGUI: 1
   m_defaultScale: 1
   m_LastWindowPixelSize: {x: 891.25, y: 526.25}
+=======
+      x: -575
+      y: -265.5
+      width: 1150
+      height: 531
+    m_MinimalGUI: 1
+  m_defaultScale: 1
+  m_LastWindowPixelSize: {x: 1150, y: 552}
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -702,13 +797,19 @@ MonoBehaviour:
     height: 421
 =======
     y: 73
+<<<<<<< HEAD
     width: 504
     height: 770
 >>>>>>> parent of 2d773ae... 사운드추가
+=======
+    width: 378
+    height: 552
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
 <<<<<<< HEAD
       m_SelectedIDs: 60f9ffff
       m_LastClickedID: -1696
@@ -718,6 +819,11 @@ MonoBehaviour:
       m_LastClickedID: 13140
       m_ExpandedIDs: 54fbffff7e340000
 >>>>>>> parent of 2d773ae... 사운드추가
+=======
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: a6e1ffff
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -770,9 +876,14 @@ MonoBehaviour:
 =======
     x: 505
     y: 73
+<<<<<<< HEAD
     width: 1534
     height: 770
 >>>>>>> parent of 2d773ae... 사운드추가
+=======
+    width: 1150
+    height: 552
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
   m_ViewDataDictionary: {fileID: 0}
   m_ShowContextualTools: 0
   m_WindowGUID: deaaa91db6676c3479fb19865349e146
@@ -785,6 +896,7 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_Position:
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: {x: -8.6766205, y: -21.790466, z: 306.72833}
     speed: 2
     m_Value: {x: -8.6766205, y: -21.790466, z: 306.72833}
@@ -793,6 +905,11 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 29.599274, y: -18.969193, z: 723.4588}
 >>>>>>> parent of 2d773ae... 사운드추가
+=======
+    m_Target: {x: 7.5559626, y: 5.129961, z: 723.46094}
+    speed: 2
+    m_Value: {x: 7.5559626, y: 5.129961, z: 723.46094}
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -838,6 +955,7 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
+<<<<<<< HEAD
     m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
@@ -851,6 +969,15 @@ MonoBehaviour:
     speed: 2
     m_Value: 62.963924
 >>>>>>> parent of 2d773ae... 사운드추가
+=======
+    m_Target: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+    speed: 2
+    m_Value: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+  m_Size:
+    m_Target: 52.372734
+    speed: 2
+    m_Value: 52.372734
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -929,9 +1056,15 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 515.2
     width: 1060
     height: 268
+=======
+    y: 646
+    width: 1530
+    height: 353
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
   m_ViewDataDictionary: {fileID: 0}
   m_SearchFilter:
     m_NameFilter: 
@@ -946,21 +1079,35 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
+<<<<<<< HEAD
     - Assets/Scenes
     m_Globs: []
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
   - Assets/Scenes
+=======
+    - Assets
+  m_ViewMode: 1
+  m_StartGridSize: 64
+  m_LastFolders:
+  - Assets
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "C:\\Users\\pjhoo\\OneDrive\\\uBB38\uC11C\\GitHub\\Rolling-Stones\\RollingStones"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
     m_SelectedIDs: 44370000
     m_LastClickedID: 14148
     m_ExpandedIDs: 00000000363700003837000000ca9a3b
+=======
+    m_SelectedIDs: f2410000
+    m_LastClickedID: 16882
+    m_ExpandedIDs: 00000000f2410000f441000000ca9a3b
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -988,7 +1135,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 000000003637000038370000
+=======
+    m_ExpandedIDs: 00000000f2410000f441000000ca9a3b
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1015,7 +1166,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c623000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1138,9 +1289,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     y: 645
+=======
+    y: 646
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
     width: 1530
-    height: 354
+    height: 353
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &18
 MonoBehaviour:
@@ -1176,6 +1331,7 @@ MonoBehaviour:
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
   m_LastVerticalScrollValue: 0
+<<<<<<< HEAD
   m_AssetGUID: 
   m_InstanceID: 0
   m_LockTracker:
@@ -1200,3 +1356,5 @@ MonoBehaviour:
     height: 495
   m_ViewDataDictionary: {fileID: 0}
 >>>>>>> parent of 2d773ae... 사운드추가
+=======
+>>>>>>> parent of 58603fe... 테스트용 맵 추가
