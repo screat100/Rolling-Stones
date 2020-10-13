@@ -1657,7 +1657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpSound: {fileID: 8300000, guid: 219a1d1498dadb04ab2eb1df08e12f1e, type: 3}
-  DoorSound: {fileID: 8300000, guid: fb9cccb9752820c43bb45b4831677811, type: 3}
+  DoorSound: {fileID: 8300000, guid: 96557e54bf33e244fb956e0a5f36138c, type: 3}
   MainMusic: {fileID: 8300000, guid: 967e7bfa697b55247af57164f4030a12, type: 3}
   FallSound: {fileID: 0}
   WallSound: {fileID: 8300000, guid: 93f63bf698e6edc48ab9cab02cedc094, type: 3}
