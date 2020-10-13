@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Base path: 'C:/Program Files/Unity/Hub/Editor/2019.3.6f1/Editor/Data', plugins path 'C:/Program Files/Unity/Hub/Editor/2019.3.6f1/Editor/Data/PlaybackEngines'
 =======
 Base path: 'C:/Program Files/Unity/Hub/Editor/2020.1.4f1/Editor/Data', plugins path 'C:/Program Files/Unity/Hub/Editor/2020.1.4f1/Editor/Data/PlaybackEngines'
 >>>>>>> parent of 4849bf8... revert commit
+=======
+Base path: 'C:/Program Files/2019.3.6f1/Editor/Data', plugins path 'C:/Program Files/2019.3.6f1/Editor/Data/PlaybackEngines'
+Cmd: initializeCompiler
+>>>>>>> parent of 46660f3... 사운드추가
 Cmd: initializeCompiler
