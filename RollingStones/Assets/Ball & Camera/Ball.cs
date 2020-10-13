@@ -11,10 +11,11 @@ public class Ball : MonoBehaviour
     // rb는 공의 rigidBody
     Rigidbody rb;
 
-    // power는 버튼 누름에 따른 이동 강도를 결정
+    // 공의 이동과 관련된 변수들
+    // 공은 카메라가 보는 방향을 기준으로 이동
     Vector3 camForward;
     Vector3 camRight;
-    float power = 0.25f;
+    float moveConstant = 0.25f; // 버튼 누름에 따른 이동 강도를 결정하는 상수
 
     // 공은 바닥에 붙어있을 때에만 점프할 수 있음
     bool canJump;
@@ -22,7 +23,10 @@ public class Ball : MonoBehaviour
     // 추락지역에 떨어지거나 성문을 완전히 파괴하지 못하면 이동할 시작지점의 좌표를 저장
     Vector3 startPos;
 
-    float speed;
+
+    /* status */
+    float speed; //공의 z축 속력... 문은 z축으로 부딪힐 수 있으며, 그 속도에 비례하여 피해량을 계산함
+    float speedRate; //공의 이동속도를 나타내는 스탯... 기본 1로 지정
 
     void Start()
     {
@@ -30,6 +34,9 @@ public class Ball : MonoBehaviour
         Debug.Log(GameObject.FindWithTag("door").transform.forward);
         rb = gameObject.GetComponent<Rigidbody>();
         startPos = gameObject.transform.position;
+
+        /* status */
+        speedRate = 1.0f;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -138,21 +145,21 @@ public class Ball : MonoBehaviour
             // 앞+좌
             if (Input.GetKey(KeyCode.A))
             {
-                rb.velocity += camForward * power / Mathf.Sqrt(2);
-                rb.velocity -= camRight * power / Mathf.Sqrt(2);
+                rb.velocity += camForward * moveConstant * speedRate / Mathf.Sqrt(2);
+                rb.velocity -= camRight * moveConstant * speedRate / Mathf.Sqrt(2);
             }
 
             // 앞+우
             else if (Input.GetKey(KeyCode.D))
             {
-                rb.velocity += camForward * power / Mathf.Sqrt(2);
-                rb.velocity += camRight * power / Mathf.Sqrt(2);
+                rb.velocity += camForward * moveConstant * speedRate / Mathf.Sqrt(2);
+                rb.velocity += camRight * moveConstant * speedRate / Mathf.Sqrt(2);
             }
 
             // 앞
             else
             {
-                rb.velocity += camForward * power;
+                rb.velocity += camForward * moveConstant * speedRate;
             }
         }
 
@@ -163,34 +170,34 @@ public class Ball : MonoBehaviour
             // 후+좌
             if (Input.GetKey(KeyCode.A))
             {
-                rb.velocity -= camForward * power / Mathf.Sqrt(2);
-                rb.velocity -= camRight * power / Mathf.Sqrt(2);
+                rb.velocity -= camForward * moveConstant * speedRate / Mathf.Sqrt(2);
+                rb.velocity -= camRight * moveConstant * speedRate / Mathf.Sqrt(2);
             }
 
             // 후+우
             else if (Input.GetKey(KeyCode.D))
             {
-                rb.velocity -= camForward * power / Mathf.Sqrt(2);
-                rb.velocity += camRight * power / Mathf.Sqrt(2);
+                rb.velocity -= camForward * moveConstant * speedRate / Mathf.Sqrt(2);
+                rb.velocity += camRight * moveConstant * speedRate / Mathf.Sqrt(2);
             }
 
             // 후진
             else
             {
-                rb.velocity -= camForward * power;
+                rb.velocity -= camForward * moveConstant * speedRate;
             }
         }
 
         // 좌
         else if (Input.GetKey(KeyCode.A))
         {
-            rb.velocity -= camRight * power;
+            rb.velocity -= camRight * moveConstant * speedRate;
         }
 
         // 우
         else if (Input.GetKey(KeyCode.D))
         {
-            rb.velocity += camRight * power;
+            rb.velocity += camRight * moveConstant * speedRate;
         }
 
     }
