@@ -99,13 +99,14 @@ public class Ball : MonoBehaviour
             SoundManager.Instance.PlayJumpSound(); //점프할 때 재생
         }
 
-        speed = rb.velocity.z;
+        //speed = rb.velocity.z;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        /* 공의 이동과 관련한 코드
+        /* 
+         * 공의 이동과 관련한 코드
          * RigidBody의 AddForce를 사용하여 카메라가 바라보는 방향을 기준으로 W/A/S/D키를 눌렀을 때 전/좌/후/우 방향으로 가속도 부여
          * SpaceBar 입력시 y축 방향으로 AddForce
          */

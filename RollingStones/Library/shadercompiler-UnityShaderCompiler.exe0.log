@@ -1,6 +1,9 @@
 Base path: 'C:/Program Files/Unity/Hub/Editor/2020.1.4f1/Editor/Data', plugins path ''
 Cmd: initializeCompiler
+<<<<<<< HEAD
 Cmd: preprocess
   insize=3207 outsize=1205 ok=1
 
 Quitting shader compiler process
+=======
+>>>>>>> parent of 8a40bbe... re revert
