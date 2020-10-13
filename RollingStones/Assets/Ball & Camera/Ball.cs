@@ -48,7 +48,6 @@ public class Ball : MonoBehaviour
             Debug.Log("쾅! " + damage);
             // 속도비례 데미지 주기!
             other.gameObject.GetComponent<DoorStat>().DoorTakeDamage(damage);
-            Debug.Log(damage);
             // 시작지점으로 복귀
             gameObject.transform.position = startPos;
             rb.velocity = new Vector3(0, 0, 0);

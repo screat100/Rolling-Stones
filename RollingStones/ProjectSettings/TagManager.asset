@@ -7,6 +7,7 @@ TagManager:
   - ground
   - fall
   - door
+  - Booster
   layers:
   - Default
   - TransparentFX
