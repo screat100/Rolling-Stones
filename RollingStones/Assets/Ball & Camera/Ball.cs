@@ -99,8 +99,8 @@ public class Ball : MonoBehaviour
         {
             //rb.AddForce(new Vector3(0, 1, 0) * 400);
             rb.velocity += new Vector3(0, 5, 0);
-            canJump = false; 
-            
+            canJump = false;
+
             SoundManager.Instance.PlayJumpSound(); //점프할 때 재생
         }
 
