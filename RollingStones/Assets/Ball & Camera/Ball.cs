@@ -12,8 +12,8 @@ public class Ball : MonoBehaviour
     Rigidbody rb;
 
     // power는 버튼 누름에 따른 이동 강도를 결정
-    Vector3 ballForward;
-    Vector3 ballRight;
+    Vector3 camForward;
+    Vector3 camRight;
     float power = 0.25f;
 
     // 공은 바닥에 붙어있을 때에만 점프할 수 있음
@@ -94,15 +94,33 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        /*
+         * 카메라가 바라보는 방향에 대한 코드
+         * 카메라가 바라보는 방향을 기준으로 y값은 0으로 만들고
+         * x, z값은 정규화해준다.
+         * 기존 벡터가 (a, b, c)이고 바꿔줄 벡터가 (x, 0, z)라고 하면
+         * (a:c) = (x:z)에서 x = (a/c)*z 이고, x^2+z^2 = 1 에서 z = c / sqrt(a^2+c^2) 이다.
+         */
+
+        camForward = cam.transform.forward;
+        camForward.y = 0;
+        camForward.z = cam.transform.forward.z / Mathf.Sqrt(cam.transform.forward.x * cam.transform.forward.x + cam.transform.forward.z * cam.transform.forward.z);
+        camForward.x = cam.transform.forward.x / cam.transform.forward.z * camForward.z;
+
+        Debug.Log(camForward);
+
+
+        camRight = cam.transform.right;
+        camRight.y = 0;
+        camRight.z = cam.transform.right.z / Mathf.Sqrt(cam.transform.right.x * cam.transform.right.x + cam.transform.right.z * cam.transform.right.z);
+        camRight.x = cam.transform.right.x / cam.transform.right.z * camRight.z;
+
+        Debug.Log(camRight);
+
         /* 공의 이동과 관련한 코드
-         * RigidBody의 AddForce를 사용하여 카메라가 바라보는 방향을 기준으로 W/A/S/D키를 눌렀을 때 전/좌/후/우 방향으로 가속도 부여
+         * 카메라가 바라보는 방향으로 RigidBody의 velocity를 직접 더하여 W/A/S/D키를 눌렀을 때 전/좌/후/우 방향으로 가속도 부여
          * SpaceBar 입력시 y축 방향으로 AddForce
          */
-        ballForward = cam.transform.forward;
-        ballRight = cam.transform.right;
-
-        ballForward.y = 0;
-        ballRight.y = 0;
 
         // 전진 관련
         if (Input.GetKey(KeyCode.W) && canJump)
@@ -111,21 +129,21 @@ public class Ball : MonoBehaviour
             // 앞+좌
             if (Input.GetKey(KeyCode.A))
             {
-                rb.velocity += ballForward * power * 0.5f;
-                rb.velocity -= ballRight * power * 0.5f;
+                rb.velocity += camForward * power / Mathf.Sqrt(2);
+                rb.velocity -= camRight * power / Mathf.Sqrt(2);
             }
 
             // 앞+우
             else if (Input.GetKey(KeyCode.D))
             {
-                rb.velocity += ballForward * power * 0.5f;
-                rb.velocity += ballRight * power * 0.5f;
+                rb.velocity += camForward * power / Mathf.Sqrt(2);
+                rb.velocity += camRight * power / Mathf.Sqrt(2);
             }
 
             // 앞
             else
             {
-                rb.velocity += ballForward * power;
+                rb.velocity += camForward * power;
             }
         }
 
@@ -136,34 +154,34 @@ public class Ball : MonoBehaviour
             // 후+좌
             if (Input.GetKey(KeyCode.A))
             {
-                rb.velocity -= ballForward * power * 0.5f;
-                rb.velocity -= ballRight * power * 0.5f;
+                rb.velocity -= camForward * power / Mathf.Sqrt(2);
+                rb.velocity -= camRight * power / Mathf.Sqrt(2);
             }
 
             // 후+우
             else if (Input.GetKey(KeyCode.D))
             {
-                rb.velocity -= ballForward * power * 0.5f;
-                rb.velocity += ballRight * power * 0.5f;
+                rb.velocity -= camForward * power / Mathf.Sqrt(2);
+                rb.velocity += camRight * power / Mathf.Sqrt(2);
             }
 
             // 후진
             else
             {
-                rb.velocity -= ballForward * power;
+                rb.velocity -= camForward * power;
             }
         }
 
         // 좌
         else if (Input.GetKey(KeyCode.A) && canJump)
         {
-            rb.velocity -= ballRight * power;
+            rb.velocity -= camRight * power;
         }
 
         // 우
         else if (Input.GetKey(KeyCode.D) && canJump)
         {
-            rb.velocity += ballRight * power;
+            rb.velocity += camRight * power;
         }
 
     }
