@@ -27,11 +27,15 @@ public class ui_manager : MonoBehaviour
         StageNumber.text = SceneManager.GetActiveScene().name;
 
         string timeStr;
-        timeStr = time.ToString("00.00");
+        float minute = time % 60;
+        int hour = (int)time / 60;
+        timeStr = minute.ToString("00.00");
         timeStr = timeStr.Replace(".", ":");
+        TimeUI.text = hour.ToString() + ":" + timeStr;
 
-        TimeUI.text = ((int)time / 60).ToString() +":"+ timeStr;
-        Speed.text = System.Math.Truncate(GameObject.Find("Player").GetComponent<Rigidbody>().velocity.magnitude).ToString();
+        float Vx = GameObject.Find("Player").GetComponent<Rigidbody>().velocity.x;
+        float Vz = GameObject.Find("Player").GetComponent<Rigidbody>().velocity.z;
+        Speed.text = System.Math.Truncate(Mathf.Sqrt(Vx * Vx + Vz * Vz)).ToString();
     }
 
 }
