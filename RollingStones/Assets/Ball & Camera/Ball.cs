@@ -24,21 +24,24 @@ public class Ball : MonoBehaviour
     Vector3 acceleration; //한 프레임마다 업데이트할 공의 속도 변화량
     float speed; //공의 z축 속력... 문은 z축으로 부딪힐 수 있으며, 그 속도에 비례하여 피해량을 계산함
     bool canJump; // 점프가 가능한가?
-    bool isJump; // (플레이어가 점프키를 누른) 상태인가?
+    bool isJumping; // (플레이어가 점프키를 누른) 상태인가?
+    bool canMove; // 움직일 수 있는가? (충돌 연출 중에는 움직임 불가)
 
     /* ability */
     public float speedRate; //공의 이동속도를 나타내는 스탯... 기본 1로 지정
     public float maxSpeed; //컨트롤을 통한 공의 최대 이동속도를 제한... 최대 이동속도 도달시 해당 방향으로는 가속을 받지 못함
 
+
+
     void Start()
     {
-        Debug.Log(gameObject.transform.forward);
-        Debug.Log(GameObject.FindWithTag("door").transform.forward);
         rb = gameObject.GetComponent<Rigidbody>();
         startPos = gameObject.transform.position;
 
         /* state */
-        isJump = true;
+        isJumping = true;
+        canJump = false;
+        canMove = true;
 
         /* ability */
         speedRate = 1.0f;
@@ -48,44 +51,68 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         float damage = (int)(speed);
-        isJump = false;
-
-        // 땅에 부딪혀야만 점프할 수 있음
-        if (other.gameObject.tag == "ground")
-        {
-            canJump = true;
-            isJump = false;
-        }
+        isJumping = false;
 
         // 늪지대에 들어가는 순간 현재 속도를 줄인다
         if (other.gameObject.tag == "swamp")
         {
             rb.velocity *= 0.5f;
+            SoundManager.Instance.PlaySwampSound();
         }
 
-        // 성문에 부딪히면 현재 속도에 비례하여 데미지를 입힘
+        /* 성문 충돌 관련 코드
+         * 문 hp 감소
+         * 충돌 사운드 재생
+         * 충돌 피해량 ui 표기
+         * 충돌 관련 연출 (일시적으로 움직임 제한), 게임 종료 안된 경우 시작지점으로 돌아감
+         * 게임 종료관련 코드는 <ui_manager> 스크립트에서 확인
+         */
         if (other.gameObject.tag == "door")
         {
             Debug.Log("쾅! " + damage);
-            // 속도비례 데미지 주기!
-            other.gameObject.GetComponent<DoorStat>().DoorTakeDamage(damage);
+            other.gameObject.GetComponent<DoorStat>().DoorTakeDamage(damage); // 속도비례 데미지 주기!
 
             SoundManager.Instance.PlayDoorSound(); //성문 부딪혔을 때 재생
 
-            // 시작지점으로 복귀
-            gameObject.transform.position = startPos;
-            rb.velocity = new Vector3(0, 0, 0);
-            rb.angularVelocity = new Vector3(0, 0, 0);
+            
+            FindObjectOfType<ui_manager>().DamageFontOn(damage);//충돌 후 입힌 피해량 표기
+            
+            //충돌 후 게임 2초간 중단
+            canMove = false;
+            rb.velocity -= new Vector3(0, 0, 1) * 10;
+            Invoke("CrashToDoor", 2);
+
         }
 
+        // 벽에 부딪힌 소리 재생
         if (other.gameObject.tag == "wall")
         {
             SoundManager.Instance.PlayWallSound();
         }
     }
 
+    //문 충돌 이후, 게임이 끝나지 않았다면 시작지점으로 복귀
+    void CrashToDoor()
+    {
+        if (!FindObjectOfType<ui_manager>().isStageOver)
+        {
+            canMove = true;
+            gameObject.transform.position = startPos;
+            rb.velocity = new Vector3(0, 0, 0);
+            rb.angularVelocity = new Vector3(0, 0, 0);
+        }
+    }
+
     private void OnCollisionStay(Collision other)
     {
+        // 땅에 부딪혀야만 점프할 수 있음
+        if (other.gameObject.tag == "ground")
+        {
+            Debug.Log("나는 땅위에있다!!!!");
+            canJump = true;
+            isJumping = false;
+        }
+
         // 늪지대를 밟고있다면 이동속도 및 최대 이동속도 감소
         if (other.gameObject.tag == "swamp")
         {
@@ -106,6 +133,7 @@ public class Ball : MonoBehaviour
         if (other.gameObject.tag == "ground")
         {
             canJump = false;
+            isJumping = true;
         }
     }
 
@@ -132,7 +160,7 @@ public class Ball : MonoBehaviour
             //rb.AddForce(new Vector3(0, 1, 0) * 400);
             rb.velocity += new Vector3(0, 5, 0);
             canJump = false;
-            isJump = true;
+            isJumping = true;
 
             SoundManager.Instance.PlayJumpSound(); //점프할 때 재생
         }
@@ -150,23 +178,23 @@ public class Ball : MonoBehaviour
          * 기존 벡터가 (a, b, c)이고 바꿔줄 벡터가 (x, 0, z)라고 하면
          * (a:c) = (x:z)에서 x = (a/c)*z 이고, x^2+z^2 = 1 에서 z = c / sqrt(a^2+c^2) 이다.
          */
+        {
+            camForward = cam.transform.forward;
+            camForward.y = 0;
+            // temp = sqrt(a^2+c^2) 값이 0 으로 반올림되는 것을 방지
+            float temp = Mathf.Sqrt(cam.transform.forward.x * cam.transform.forward.x + cam.transform.forward.z * cam.transform.forward.z);
+            if (temp == 0) temp = 0.000001f;
+            camForward.z = cam.transform.forward.z / temp;
+            camForward.x = cam.transform.forward.x / cam.transform.forward.z * camForward.z;
 
-        camForward = cam.transform.forward;
-        camForward.y = 0;
-        // temp = sqrt(a^2+c^2) 값이 0 으로 반올림되는 것을 방지
-        float temp = Mathf.Sqrt(cam.transform.forward.x * cam.transform.forward.x + cam.transform.forward.z * cam.transform.forward.z);
-        if (temp == 0) temp = 0.000001f;
-        camForward.z = cam.transform.forward.z / temp;
-        camForward.x = cam.transform.forward.x / cam.transform.forward.z * camForward.z;
-
-        camRight = cam.transform.right;
-        camRight.y = 0;
-        // temp = sqrt(a^2+c^2) 값이 0 으로 반올림되는 것을 방지
-        temp = Mathf.Sqrt(cam.transform.right.x * cam.transform.right.x + cam.transform.right.z * cam.transform.right.z);
-        if (temp == 0) temp = 0.000001f;
-        camRight.z = cam.transform.right.z / temp;
-        camRight.x = cam.transform.right.x / cam.transform.right.z * camRight.z;
-
+            camRight = cam.transform.right;
+            camRight.y = 0;
+            // temp = sqrt(a^2+c^2) 값이 0 으로 반올림되는 것을 방지
+            temp = Mathf.Sqrt(cam.transform.right.x * cam.transform.right.x + cam.transform.right.z * cam.transform.right.z);
+            if (temp == 0) temp = 0.000001f;
+            camRight.z = cam.transform.right.z / temp;
+            camRight.x = cam.transform.right.x / cam.transform.right.z * camRight.z;
+        }
 
         /* 공의 이동과 관련한 코드
          * 카메라가 바라보는 방향으로 RigidBody의 velocity를 직접 더하여 W/A/S/D키를 눌렀을 때 전/좌/후/우 방향으로 속도 부여
@@ -174,92 +202,92 @@ public class Ball : MonoBehaviour
          * (10/13) 대각선으로 누른 경우, 각 방향으로의 가속에 대해 Sqrt(2)로 나눠 한 방향으로 이동할 때와 동일한 속도를 부여받음
          * (10/13) 점프 중에는 방향키 조정이 먹지 않도록 함 --> 점프를 통한 가속효과 제거 및 점프구간의 난이도 증가
          */
+        if(canMove) {
+            acceleration = new Vector3(0, 0, 0);
 
-        acceleration = new Vector3(0, 0, 0);
-
-        // 전진 관련
-        if (Input.GetKey(KeyCode.W) && !isJump)
-        {
-            // 앞+좌
-            if (Input.GetKey(KeyCode.A))
+            // 전진 관련
+            if (Input.GetKey(KeyCode.W) && !isJumping)
             {
-                acceleration += camForward * moveConstant * speedRate / Mathf.Sqrt(2);
-                acceleration -= camRight * moveConstant * speedRate / Mathf.Sqrt(2);
+                // 앞+좌
+                if (Input.GetKey(KeyCode.A))
+                {
+                    acceleration += camForward * moveConstant * speedRate / Mathf.Sqrt(2);
+                    acceleration -= camRight * moveConstant * speedRate / Mathf.Sqrt(2);
+                }
+
+                // 앞+우
+                else if (Input.GetKey(KeyCode.D))
+                {
+                    acceleration += camForward * moveConstant * speedRate / Mathf.Sqrt(2);
+                    acceleration += camRight * moveConstant * speedRate / Mathf.Sqrt(2);
+                }
+
+                // 앞
+                else
+                {
+                    acceleration += camForward * moveConstant * speedRate;
+                }
             }
 
-            // 앞+우
-            else if (Input.GetKey(KeyCode.D))
+            // 후진 관련
+            else if (Input.GetKey(KeyCode.S) && !isJumping)
             {
-                acceleration += camForward * moveConstant * speedRate / Mathf.Sqrt(2);
-                acceleration += camRight * moveConstant * speedRate / Mathf.Sqrt(2);
+                // 후+좌
+                if (Input.GetKey(KeyCode.A))
+                {
+                    acceleration -= camForward * moveConstant * speedRate / Mathf.Sqrt(2);
+                    acceleration -= camRight * moveConstant * speedRate / Mathf.Sqrt(2);
+                }
+
+                // 후+우
+                else if (Input.GetKey(KeyCode.D))
+                {
+                    acceleration -= camForward * moveConstant * speedRate / Mathf.Sqrt(2);
+                    acceleration += camRight * moveConstant * speedRate / Mathf.Sqrt(2);
+                }
+
+                // 후진
+                else
+                {
+                    acceleration -= camForward * moveConstant * speedRate;
+                }
             }
 
-            // 앞
-            else
+            // 좌
+            else if (Input.GetKey(KeyCode.A) && !isJumping)
             {
-                acceleration += camForward * moveConstant * speedRate;
+                acceleration -= camRight * moveConstant * speedRate;
             }
+
+            // 우
+            else if (Input.GetKey(KeyCode.D) && !isJumping)
+            {
+                acceleration += camRight * moveConstant * speedRate;
+            }
+
+            // 가만히 있으면 이동속도가 점점 줄어들어야 함
+            // float 값이 튀는 것을 막기 위해 일정수치 이하가 되면 0으로 만듦
+            else if (!isJumping)
+            {
+                float stopMoveRate = 0.99f;
+
+                rb.velocity = new Vector3(rb.velocity.x * stopMoveRate, rb.velocity.y, rb.velocity.z * stopMoveRate);
+
+                if (rb.velocity.x <= 0.001f && rb.velocity.x >= -0.001f)
+                    rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
+
+                if (rb.velocity.z <= 0.001f && rb.velocity.z >= -0.001f)
+                    rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
+            }
+
+            // 컨트롤로 늘어날 수 있는 공의 최대속도 제한
+            if (rb.velocity.x >= maxSpeed || rb.velocity.x <= -maxSpeed)
+                acceleration.x = 0;
+            if (rb.velocity.z >= maxSpeed || rb.velocity.z <= -maxSpeed)
+                acceleration.z = 0;
+
+            // 컨트롤을 통한 이동속도의 변화 적용
+            rb.velocity += acceleration;
         }
-
-        // 후진 관련
-        else if (Input.GetKey(KeyCode.S) && !isJump)
-        {
-            // 후+좌
-            if (Input.GetKey(KeyCode.A))
-            {
-                acceleration -= camForward * moveConstant * speedRate / Mathf.Sqrt(2);
-                acceleration -= camRight * moveConstant * speedRate / Mathf.Sqrt(2);
-            }
-
-            // 후+우
-            else if (Input.GetKey(KeyCode.D))
-            {
-                acceleration -= camForward * moveConstant * speedRate / Mathf.Sqrt(2);
-                acceleration += camRight * moveConstant * speedRate / Mathf.Sqrt(2);
-            }
-
-            // 후진
-            else
-            {
-                acceleration -= camForward * moveConstant * speedRate;
-            }
-        }
-
-        // 좌
-        else if (Input.GetKey(KeyCode.A) && !isJump)
-        {
-             acceleration -= camRight * moveConstant * speedRate;
-        }
-
-        // 우
-        else if (Input.GetKey(KeyCode.D) && !isJump)
-        {
-            acceleration += camRight * moveConstant * speedRate;
-        }
-
-        // 가만히 있으면 이동속도가 점점 줄어들어야 함
-        // float 값이 튀는 것을 막기 위해 일정수치 이하가 되면 0으로 만듦
-        else if (!isJump)
-        {
-            float stopMoveRate = 0.99f;
-
-            rb.velocity = new Vector3(rb.velocity.x * stopMoveRate, rb.velocity.y, rb.velocity.z * stopMoveRate);
-
-            if (rb.velocity.x <= 0.001f && rb.velocity.x >= -0.001f)
-                rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
-
-            if (rb.velocity.z <= 0.001f && rb.velocity.z >= -0.001f)
-                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
-        }
-
-        // 컨트롤로 늘어날 수 있는 공의 최대속도 제한
-        if (rb.velocity.x >= maxSpeed || rb.velocity.x <= -maxSpeed)
-            acceleration.x = 0;
-        if (rb.velocity.z >= maxSpeed || rb.velocity.z <= -maxSpeed)
-            acceleration.z = 0;
-
-        // 컨트롤을 통한 이동속도의 변화 적용
-        rb.velocity += acceleration;
-
     }
 }

@@ -25,6 +25,8 @@ public class BoosterZone : MonoBehaviour
             //볼의 속력을 급속하게 증가!
             Rigidbody ballRG = other.gameObject.GetComponent<Rigidbody>();
             ballRG.velocity += new Vector3(0,0,transform.forward.z) * Power;
+
+            FindObjectOfType<SoundManager>().PlayBoosterSound();
         }
     }
 }

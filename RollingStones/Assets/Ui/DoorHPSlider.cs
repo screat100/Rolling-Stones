@@ -11,7 +11,8 @@ public class DoorHPSlider : MonoBehaviour
     GameObject Door;
     float MaxHP;
     float CurrentHP;
-    // Start is called before the first frame update
+
+
     void Start()
     {
         Door = GameObject.Find("Door");
@@ -28,6 +29,7 @@ public class DoorHPSlider : MonoBehaviour
     {
         UpdateDoorHP();
     }
+
     private void UpdateDoorHP()
     {
         //Door의 체력을 계속해서 업데이트

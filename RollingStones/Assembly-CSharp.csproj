@@ -67,37 +67,61 @@
     <Compile Include="Assets\Ball &amp; Camera\Camera.cs" />
     <Compile Include="Assets\BoosterZone\Scripts\BoosterZone.cs" />
     <Compile Include="Assets\Door\Scripts\DoorStat.cs" />
+<<<<<<< HEAD
     <Compile Include="Assets\MenuScene.cs" />
+    <Compile Include="Assets\Propeller\script\propeller.cs" />
+    <Compile Include="Assets\Propeller\script\wing.cs" />
     <Compile Include="Assets\SelectStage.cs" />
+=======
+    <Compile Include="Assets\SceneManage.cs" />
+>>>>>>> bf52647afe69449b7632c4e9236fb75a99340c23
     <Compile Include="Assets\Sound\SoundManager.cs" />
     <Compile Include="Assets\Ui\DoorHPSlider.cs" />
     <Compile Include="Assets\Ui\ui_manager.cs" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Users/Seongjae Yoon/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>C:/Users/Seongjae Yoon/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/Seongjae Yoon/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/Seongjae Yoon/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Users/Seongjae Yoon/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/Seongjae Yoon/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:/Users/Seongjae Yoon/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/Seongjae Yoon/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/Seongjae Yoon/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

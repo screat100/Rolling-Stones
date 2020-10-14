@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SelectStage : MonoBehaviour
+public class SceneManage : MonoBehaviour
 {
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void GoToStage1()
     {
         SceneManager.LoadScene("Stage1");
@@ -21,10 +26,14 @@ public class SelectStage : MonoBehaviour
     {
         SceneManager.LoadScene("Stage4");
     }
-    public void GoToBack()
+    public void GoToMain()
     {
         SceneManager.LoadScene("Main");
     }
 
+    public void GoToSelectStage()
+    {
+        SceneManager.LoadScene("SelectStage");
+    }
 
 }
