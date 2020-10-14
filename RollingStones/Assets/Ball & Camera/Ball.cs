@@ -86,13 +86,18 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionStay(Collision other)
     {
-        // 늪지대를 밟고있다면 이동속도 감소
+        // 늪지대를 밟고있다면 이동속도 및 최대 이동속도 감소
         if (other.gameObject.tag == "swamp")
+        {
             speedRate = 0.5f;
+            maxSpeed = 15;
+        }
 
         else
+        {
             speedRate = 1.0f;
-
+            maxSpeed = 30;
+        }
     }
 
     private void OnCollisionExit(Collision other)
@@ -227,9 +232,24 @@ public class Ball : MonoBehaviour
         }
 
         // 우
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) && !isJump)
         {
             acceleration += camRight * moveConstant * speedRate;
+        }
+
+        // 가만히 있으면 이동속도가 점점 줄어들어야 함
+        // float 값이 튀는 것을 막기 위해 일정수치 이하가 되면 0으로 만듦
+        else
+        {
+            float stopMoveRate = 0.99f;
+
+            rb.velocity = new Vector3(rb.velocity.x * stopMoveRate, rb.velocity.y, rb.velocity.z * stopMoveRate);
+
+            if (rb.velocity.x <= 0.001f && rb.velocity.x >= -0.001f)
+                rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
+
+            if (rb.velocity.z <= 0.001f && rb.velocity.z >= -0.001f)
+                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
         }
 
         // 컨트롤로 늘어날 수 있는 공의 최대속도 제한
@@ -238,8 +258,8 @@ public class Ball : MonoBehaviour
         if (rb.velocity.z >= maxSpeed || rb.velocity.z <= -maxSpeed)
             acceleration.z = 0;
 
-        // 이동변화 적용
+        // 컨트롤을 통한 이동속도의 변화 적용
         rb.velocity += acceleration;
-        
+
     }
 }
