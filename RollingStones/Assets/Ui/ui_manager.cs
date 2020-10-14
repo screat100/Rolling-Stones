@@ -23,6 +23,7 @@ public class ui_manager : MonoBehaviour
         // 스테이지 넘버 관련 코드
         StageNumber.text = SceneManager.GetActiveScene().name;
 
+        ResultPopup.SetActive(false);
         time =0f;
     }
 

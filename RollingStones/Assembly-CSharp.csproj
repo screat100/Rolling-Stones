@@ -67,8 +67,7 @@
     <Compile Include="Assets\Ball &amp; Camera\Camera.cs" />
     <Compile Include="Assets\BoosterZone\Scripts\BoosterZone.cs" />
     <Compile Include="Assets\Door\Scripts\DoorStat.cs" />
-    <Compile Include="Assets\MenuScene.cs" />
-    <Compile Include="Assets\SelectStage.cs" />
+    <Compile Include="Assets\SceneManage.cs" />
     <Compile Include="Assets\Sound\SoundManager.cs" />
     <Compile Include="Assets\Ui\DoorHPSlider.cs" />
     <Compile Include="Assets\Ui\ui_manager.cs" />
