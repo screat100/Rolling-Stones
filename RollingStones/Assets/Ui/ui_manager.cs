@@ -16,14 +16,17 @@ public class ui_manager : MonoBehaviour
     public Text Speed;
 
     public GameObject ResultPopup;
+    Text damageFont;
 
 
     void Start()
     {
         // 스테이지 넘버 관련 코드
         StageNumber.text = SceneManager.GetActiveScene().name;
-
+                
         ResultPopup.SetActive(false);
+        damageFont = gameObject.transform.Find("DamageFont").GetComponent<Text>();
+        damageFont.gameObject.SetActive(false);
         time =0f;
     }
 
@@ -62,7 +65,20 @@ public class ui_manager : MonoBehaviour
             ResultPopup.transform.Find("Time").GetComponent<Text>().text = TimeUI.text;
             ResultPopup.transform.Find("Star").GetComponent<Text>().text = star;
         }
+    }
 
+    public void DamageFontOn(float damage)
+    {
+        damageFont.gameObject.SetActive(true);
+        damageFont.text = damage.ToString();
+        
+        Invoke("DamageFontOff", 2);
+    }
+
+    public void DamageFontOff()
+    {
+
+        damageFont.gameObject.SetActive(false);
     }
 
 }

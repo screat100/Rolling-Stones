@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
 
-    public AudioClip JumpSound, DoorSound, MainMusic, FallSound, WallSound;
+    public AudioClip JumpSound, DoorSound, MainMusic, FallSound, WallSound, SwampSound, BoosterSound;
     AudioSource MyAudio;
     public static SoundManager Instance;
 
@@ -45,6 +45,15 @@ public class SoundManager : MonoBehaviour
         MyAudio.PlayOneShot(WallSound);
     }
 
+    public void PlaySwampSound()
+    {
+        MyAudio.PlayOneShot(SwampSound);
+    }
+
+    public void PlayBoosterSound()
+    {
+        MyAudio.PlayOneShot(BoosterSound);
+    }
     // Update is called once per frame
     void Update()
     {

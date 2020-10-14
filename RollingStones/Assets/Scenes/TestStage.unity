@@ -720,9 +720,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ed688fe1598e64f9cede107998bb6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStageOver: 0
   StageNumber: {fileID: 115901829}
   TimeUI: {fileID: 397553643}
   Speed: {fileID: 1128903937}
+  ResultPopup: {fileID: 0}
 --- !u!114 &520800533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1138,6 +1140,8 @@ MonoBehaviour:
   MainMusic: {fileID: 8300000, guid: 967e7bfa697b55247af57164f4030a12, type: 3}
   FallSound: {fileID: 0}
   WallSound: {fileID: 8300000, guid: 93f63bf698e6edc48ab9cab02cedc094, type: 3}
+  SwampSound: {fileID: 8300000, guid: 8f15db0e6a90d5d4b8157faba165125c, type: 3}
+  BoosterSound: {fileID: 8300000, guid: 3e51636fab6080a489f37864d321a280, type: 3}
 --- !u!81 &1248766123
 AudioListener:
   m_ObjectHideFlags: 0
