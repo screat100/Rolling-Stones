@@ -108,7 +108,6 @@ public class Ball : MonoBehaviour
         // 땅에 부딪혀야만 점프할 수 있음
         if (other.gameObject.tag == "ground")
         {
-            Debug.Log("나는 땅위에있다!!!!");
             canJump = true;
             isJumping = false;
         }
@@ -169,7 +168,6 @@ public class Ball : MonoBehaviour
         speed = rb.velocity.z;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         /*
@@ -287,7 +285,16 @@ public class Ball : MonoBehaviour
                 acceleration.z = 0;
 
             // 컨트롤을 통한 이동속도의 변화 적용
-            rb.velocity += acceleration;
+            try{
+            }
+            catch (UnassignedReferenceException)
+            {
+
+            }
+            if (!float.IsNaN(acceleration.x) && !float.IsNaN(acceleration.y) && !float.IsNaN(acceleration.z))
+            {
+                rb.velocity += acceleration;
+            }
         }
     }
 }
