@@ -8,17 +8,22 @@ public class DoorStat : MonoBehaviour
 
     [System.NonSerialized]
     public float HP;
-    // Start is called before the first frame update
+
+
     void Start()
     {
         HP = MaxHP;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+        if(HP <= 0)
+        {
+            FindObjectOfType<ui_manager>().isStageOver = true;
+        }    
     }
+
     public void DoorTakeDamage(float Damage)
     {
         HP = HP - Damage;

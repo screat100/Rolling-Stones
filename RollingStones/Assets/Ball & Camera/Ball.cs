@@ -239,7 +239,7 @@ public class Ball : MonoBehaviour
 
         // 가만히 있으면 이동속도가 점점 줄어들어야 함
         // float 값이 튀는 것을 막기 위해 일정수치 이하가 되면 0으로 만듦
-        else
+        else if (!isJump)
         {
             float stopMoveRate = 0.99f;
 
