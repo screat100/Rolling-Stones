@@ -32,7 +32,6 @@ public class Ball : MonoBehaviour
     public float maxSpeed; //컨트롤을 통한 공의 최대 이동속도를 제한... 최대 이동속도 도달시 해당 방향으로는 가속을 받지 못함
 
 
-
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -135,20 +134,32 @@ public class Ball : MonoBehaviour
             isJumping = true;
         }
     }
-
+    void FallingDead()
+    {
+        if (!FindObjectOfType<ui_manager>().isStageOver)
+        {
+            canMove = true;
+            gameObject.transform.position = startPos;
+            rb.velocity = new Vector3(0, 0, 0);
+            rb.angularVelocity = new Vector3(0, 0, 0);
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         // 추락지역에 떨어지면 최초 시작지점으로 이동
         if (other.gameObject.tag == "fall")
         {
-            Debug.Log("Falled !");
+            Debug.Log("Fall !");
+            canMove = false;
+            Invoke("FallingDead", 2);
 
             SoundManager.Instance.PlayFallSound();
-            gameObject.transform.position = startPos;
-            rb.velocity = new Vector3(0, 0, 0); //추락 이후 속도값을 없앰
-            rb.angularVelocity = new Vector3(0, 0, 0); //추락 이후 공의 회전을 없앰
+          //  gameObject.transform.position = startPos;
+          //  rb.velocity = new Vector3(0, 0, 0); //추락 이후 속도값을 없앰
+           // rb.angularVelocity = new Vector3(0, 0, 0); //추락 이후 공의 회전을 없앰
         }
     }
+
 
     void Update()
     {

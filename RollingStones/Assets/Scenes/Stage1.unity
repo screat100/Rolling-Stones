@@ -2223,9 +2223,10 @@ MonoBehaviour:
   JumpSound: {fileID: 8300000, guid: 219a1d1498dadb04ab2eb1df08e12f1e, type: 3}
   DoorSound: {fileID: 8300000, guid: 96557e54bf33e244fb956e0a5f36138c, type: 3}
   MainMusic: {fileID: 8300000, guid: 967e7bfa697b55247af57164f4030a12, type: 3}
-  FallSound: {fileID: 0}
+  FallSound: {fileID: 8300000, guid: fadbbb1f79055144394b0c9488dbd5f4, type: 3}
   WallSound: {fileID: 8300000, guid: 93f63bf698e6edc48ab9cab02cedc094, type: 3}
   SwampSound: {fileID: 8300000, guid: 8f15db0e6a90d5d4b8157faba165125c, type: 3}
+  BoosterSound: {fileID: 0}
 --- !u!82 &1080663054
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3852,7 +3853,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1684046691}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.67662, y: -32.755386, z: -40.594574}
+  m_LocalPosition: {x: 22.67662, y: -27.9, z: -41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1879734639}
@@ -4373,7 +4374,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
