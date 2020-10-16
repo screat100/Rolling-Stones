@@ -45,9 +45,8 @@ public class ui_manager : MonoBehaviour
         TimeUI.text = hour.ToString() + ":" + timeStr;
 
         // 스피드 관련 코드
-        float Vx = GameObject.Find("Player").GetComponent<Rigidbody>().velocity.x;
-        float Vz = GameObject.Find("Player").GetComponent<Rigidbody>().velocity.z;
-        Speed.text = System.Math.Truncate(Mathf.Sqrt(Vx * Vx + Vz * Vz)).ToString();
+        int BallSpeed = (int)(GameObject.Find("Player").GetComponent<Rigidbody>().velocity.magnitude);
+        Speed.text = BallSpeed.ToString();
 
         // 스테이지 종료 시 결과 팝업을 띄움
         if(isStageOver)

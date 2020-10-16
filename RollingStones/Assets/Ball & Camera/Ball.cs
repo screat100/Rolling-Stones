@@ -114,6 +114,8 @@ public class Ball : MonoBehaviour
         // 늪지대를 밟고있다면 이동속도 및 최대 이동속도 감소
         if (other.gameObject.tag == "swamp")
         {
+            canJump = false;
+            isJumping = false;
             speedRate = 0.5f;
             maxSpeed = 15;
         }
@@ -167,7 +169,6 @@ public class Ball : MonoBehaviour
         // FixedUpdate에 넣으면 가끔 점프가 먹히지 않을 때가 있어 update에 넣었음
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
-            //rb.AddForce(new Vector3(0, 1, 0) * 400);
             rb.velocity += new Vector3(0, 5, 0);
             canJump = false;
             isJumping = true;
@@ -276,7 +277,7 @@ public class Ball : MonoBehaviour
 
             // 가만히 있으면 이동속도가 점점 줄어들어야 함
             // float 값이 튀는 것을 막기 위해 일정수치 이하가 되면 0으로 만듦
-            else if (!isJumping)
+            else if (!isJumping && (rb.velocity.y <= 0.00001f && rb.velocity.y >= -0.00001f))
             {
                 float stopMoveRate = 0.99f;
 
