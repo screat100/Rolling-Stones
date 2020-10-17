@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 113739295}
   - component: {fileID: 113739294}
   - component: {fileID: 113739293}
+  - component: {fileID: 113739296}
   - component: {fileID: 113739292}
   m_Layer: 0
   m_Name: ground
@@ -264,10 +265,10 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 113739291}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.0000002, y: 1, z: 1.0000002}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &113739293
 MeshRenderer:
@@ -287,7 +288,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9b701458ccc39174dac6c78283a4309e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -330,6 +331,19 @@ Transform:
   m_Father: {fileID: 298676620}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &113739296
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113739291}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000002, y: 1, z: 1.0000002}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &115901828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,6 +1867,7 @@ GameObject:
   - component: {fileID: 1253332094}
   - component: {fileID: 1253332093}
   - component: {fileID: 1253332092}
+  - component: {fileID: 1253332097}
   m_Layer: 0
   m_Name: Door
   m_TagString: door
@@ -1947,6 +1962,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1253332097
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253332091}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1274366037
 GameObject:
   m_ObjectHideFlags: 0
@@ -2474,6 +2502,7 @@ GameObject:
   - component: {fileID: 1544804192}
   - component: {fileID: 1544804191}
   - component: {fileID: 1544804190}
+  - component: {fileID: 1544804194}
   m_Layer: 0
   m_Name: swamp
   m_TagString: swamp
@@ -2555,6 +2584,19 @@ Transform:
   m_Father: {fileID: 298676620}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1544804194
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544804189}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1557985616
 GameObject:
   m_ObjectHideFlags: 0
@@ -3595,7 +3637,7 @@ PrefabInstance:
     - target: {fileID: 1269953200433901840, guid: b74590c066b5bee4bae2a835550162d4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.320044
+      value: 11.05
       objectReference: {fileID: 0}
     - target: {fileID: 1269953200433901840, guid: b74590c066b5bee4bae2a835550162d4,
         type: 3}

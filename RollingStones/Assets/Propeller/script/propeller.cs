@@ -18,10 +18,10 @@ public class propeller : MonoBehaviour
     }
     void OnColliderEnter(Collider hit)
     {
-        if (hit.gameObject.name == "Player")
-        {
-            Rigidbody ballRG = hit.gameObject.GetComponent<Rigidbody>();
-            ballRG.velocity += new Vector3(transform.forward.x * Speed, 0, transform.forward.z * Speed);
-        }
+        //if (hit.gameObject.name == "Player")
+        //{
+        //    Rigidbody ballRG = hit.gameObject.GetComponent<Rigidbody>();
+        //    ballRG.velocity += new Vector3(transform.forward.x * Speed, 0, transform.forward.z * Speed);
+        //}
     }
 }

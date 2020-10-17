@@ -24,8 +24,8 @@ public class Ball : MonoBehaviour
     Vector3 acceleration; //한 프레임마다 업데이트할 공의 속도 변화량
     float speed; //공의 z축 속력... 문은 z축으로 부딪힐 수 있으며, 그 속도에 비례하여 피해량을 계산함
     bool canJump; // 점프가 가능한가?
-    bool isJumping; // (플레이어가 점프키를 누른) 상태인가?
-    bool canMove; // 움직일 수 있는가? (충돌 연출 중에는 움직임 불가)
+    bool canMove; // 움직일 수 있는가? (점프 중에는 움직임 불가)
+    bool neverMove; // 연출에 의해 움직임을 정지시키기 위함
 
     /* ability */
     public float speedRate; //공의 이동속도를 나타내는 스탯... 기본 1로 지정
@@ -38,19 +38,25 @@ public class Ball : MonoBehaviour
         startPos = gameObject.transform.position;
 
         /* state */
-        isJumping = true;
         canJump = false;
-        canMove = true;
+        canMove = false;
+        neverMove = false;
 
         /* ability */
         speedRate = 1.0f;
         maxSpeed = 30;
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         float damage = (int)(speed);
-        isJumping = false;
+
+        if(other.gameObject.tag == "ground")
+        {
+            canMove = true;
+            canJump = true;
+        }
+
 
         // 늪지대에 들어가는 순간 현재 속도를 줄인다
         if (other.gameObject.tag == "swamp")
@@ -73,49 +79,41 @@ public class Ball : MonoBehaviour
 
             SoundManager.Instance.PlayDoorSound(); //성문 부딪혔을 때 재생
 
-            
+
             FindObjectOfType<ui_manager>().DamageFontOn(damage);//충돌 후 입힌 피해량 표기
-            
+
             //충돌 후 게임 2초간 중단
-            canMove = false;
+            neverMove = true;
             rb.velocity -= new Vector3(0, 0, 1) * 10;
             Invoke("CrashToDoor", 2);
 
         }
 
-        // 벽에 부딪힌 소리 재생
-        if (other.gameObject.tag == "wall")
+        // 추락지역에 떨어지면 최초 시작지점으로 이동
+        if (other.gameObject.tag == "fall")
         {
-            SoundManager.Instance.PlayWallSound();
+            Debug.Log("Fall !");
+            canMove = false;
+            Invoke("FallingDead", 2);
+
+            SoundManager.Instance.PlayFallSound();
         }
     }
 
-    //문 충돌 이후, 게임이 끝나지 않았다면 시작지점으로 복귀
-    void CrashToDoor()
+    private void OnTriggerStay(Collider other)
     {
-        if (!FindObjectOfType<ui_manager>().isStageOver)
-        {
-            canMove = true;
-            gameObject.transform.position = startPos;
-            rb.velocity = new Vector3(0, 0, 0);
-            rb.angularVelocity = new Vector3(0, 0, 0);
-        }
-    }
-
-    private void OnCollisionStay(Collision other)
-    {
-        // 땅에 부딪혀야만 점프할 수 있음
         if (other.gameObject.tag == "ground")
         {
+            Debug.Log("ground");
             canJump = true;
-            isJumping = false;
+            canMove = true;
         }
+
 
         // 늪지대를 밟고있다면 이동속도 및 최대 이동속도 감소
         if (other.gameObject.tag == "swamp")
         {
             canJump = false;
-            isJumping = false;
             speedRate = 0.5f;
             maxSpeed = 15;
         }
@@ -127,15 +125,97 @@ public class Ball : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision other)
+    private void OnTriggerExit(Collider other)
     {
         // (점프, 추락 등의 이유로) 바닥에서 떨어지면 점프 불가능
         if (other.gameObject.tag == "ground")
         {
-            canJump = false;
-            isJumping = true;
+            //canJump = false;
+            //canMove = false;
         }
     }
+
+    //private void OnCollisionEnter(Collision other)
+    //{
+    //    float damage = (int)(speed);
+    //    isJumping = false;
+
+    //    // 늪지대에 들어가는 순간 현재 속도를 줄인다
+    //    if (other.gameObject.tag == "swamp")
+    //    {
+    //        rb.velocity *= 0.5f;
+    //        SoundManager.Instance.PlaySwampSound();
+    //    }
+
+    //    /* 성문 충돌 관련 코드
+    //     * 문 hp 감소
+    //     * 충돌 사운드 재생
+    //     * 충돌 피해량 ui 표기
+    //     * 충돌 관련 연출 (일시적으로 움직임 제한), 게임 종료 안된 경우 시작지점으로 돌아감
+    //     * 게임 종료관련 코드는 <ui_manager> 스크립트에서 확인
+    //     */
+    //    if (other.gameObject.tag == "door")
+    //    {
+    //        Debug.Log("쾅! " + damage);
+    //        other.gameObject.GetComponent<DoorStat>().DoorTakeDamage(damage); // 속도비례 데미지 주기!
+
+    //        SoundManager.Instance.PlayDoorSound(); //성문 부딪혔을 때 재생
+
+
+    //        FindObjectOfType<ui_manager>().DamageFontOn(damage);//충돌 후 입힌 피해량 표기
+
+    //        //충돌 후 게임 2초간 중단
+    //        canMove = false;
+    //        rb.velocity -= new Vector3(0, 0, 1) * 10;
+    //        Invoke("CrashToDoor", 2);
+
+    //    }
+
+    //    // 벽에 부딪힌 소리 재생
+    //    if (other.gameObject.tag == "wall")
+    //    {
+    //        SoundManager.Instance.PlayWallSound();
+    //    }
+    //}
+
+    //private void OnCollisionStay(Collision other)
+    //{
+    //    // 땅에 부딪혀야만 점프할 수 있음
+    //    if (other.gameObject.tag == "ground")
+    //    {
+    //        canJump = true;
+    //        isJumping = false;
+    //    }
+
+    //    // 늪지대를 밟고있다면 이동속도 및 최대 이동속도 감소
+    //    if (other.gameObject.tag == "swamp")
+    //    {
+    //        canJump = false;
+    //        isJumping = false;
+    //        speedRate = 0.5f;
+    //        maxSpeed = 15;
+    //    }
+
+    //    else
+    //    {
+    //        speedRate = 1.0f;
+    //        maxSpeed = 30;
+    //    }
+    //}
+
+    //private void OnCollisionExit(Collision other)
+    //{
+    //    // (점프, 추락 등의 이유로) 바닥에서 떨어지면 점프 불가능
+    //    if (other.gameObject.tag == "ground")
+    //    {
+    //        canJump = false;
+    //        isJumping = true;
+    //    }
+    //}
+
+
+    // 추락 시, 최초 지점으로 돌아가는 함수
+    // Invoke를 통해 실행 ==> 추락 2초 뒤 이동하도록 함
     void FallingDead()
     {
         if (!FindObjectOfType<ui_manager>().isStageOver)
@@ -146,21 +226,27 @@ public class Ball : MonoBehaviour
             rb.angularVelocity = new Vector3(0, 0, 0);
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        // 추락지역에 떨어지면 최초 시작지점으로 이동
-        if (other.gameObject.tag == "fall")
-        {
-            Debug.Log("Fall !");
-            canMove = false;
-            Invoke("FallingDead", 2);
 
-            SoundManager.Instance.PlayFallSound();
-          //  gameObject.transform.position = startPos;
-          //  rb.velocity = new Vector3(0, 0, 0); //추락 이후 속도값을 없앰
-           // rb.angularVelocity = new Vector3(0, 0, 0); //추락 이후 공의 회전을 없앰
+    //문 충돌 이후, 게임이 끝나지 않았다면 시작지점으로 복귀
+    void CrashToDoor()
+    {
+        if (!FindObjectOfType<ui_manager>().isStageOver)
+        {
+            neverMove = true;
+            gameObject.transform.position = startPos;
+            rb.velocity = new Vector3(0, 0, 0);
+            rb.angularVelocity = new Vector3(0, 0, 0);
+        }
+
+        else
+        {
+            gameObject.transform.position = startPos;
+            rb.velocity = new Vector3(0, 0, 0);
+            rb.angularVelocity = new Vector3(0, 0, 0);
         }
     }
+
+
 
 
     void Update()
@@ -170,8 +256,8 @@ public class Ball : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
             rb.velocity += new Vector3(0, 5, 0);
+            canMove = false;
             canJump = false;
-            isJumping = true;
 
             SoundManager.Instance.PlayJumpSound(); //점프할 때 재생
         }
@@ -212,11 +298,11 @@ public class Ball : MonoBehaviour
          * (10/13) 대각선으로 누른 경우, 각 방향으로의 가속에 대해 Sqrt(2)로 나눠 한 방향으로 이동할 때와 동일한 속도를 부여받음
          * (10/13) 점프 중에는 방향키 조정이 먹지 않도록 함 --> 점프를 통한 가속효과 제거 및 점프구간의 난이도 증가
          */
-        if(canMove) {
+        if(canMove && !neverMove) {
             acceleration = new Vector3(0, 0, 0);
 
             // 전진 관련
-            if (Input.GetKey(KeyCode.W) && !isJumping)
+            if (Input.GetKey(KeyCode.W))
             {
                 // 앞+좌
                 if (Input.GetKey(KeyCode.A))
@@ -240,7 +326,7 @@ public class Ball : MonoBehaviour
             }
 
             // 후진 관련
-            else if (Input.GetKey(KeyCode.S) && !isJumping)
+            else if (Input.GetKey(KeyCode.S))
             {
                 // 후+좌
                 if (Input.GetKey(KeyCode.A))
@@ -264,22 +350,22 @@ public class Ball : MonoBehaviour
             }
 
             // 좌
-            else if (Input.GetKey(KeyCode.A) && !isJumping)
+            else if (Input.GetKey(KeyCode.A))
             {
                 acceleration -= camRight * moveConstant * speedRate;
             }
 
             // 우
-            else if (Input.GetKey(KeyCode.D) && !isJumping)
+            else if (Input.GetKey(KeyCode.D))
             {
                 acceleration += camRight * moveConstant * speedRate;
             }
 
             // 가만히 있으면 이동속도가 점점 줄어들어야 함
             // float 값이 튀는 것을 막기 위해 일정수치 이하가 되면 0으로 만듦
-            else if (!isJumping && (rb.velocity.y <= 0.00001f && rb.velocity.y >= -0.00001f))
+            else if (rb.velocity.y <= 0.00001f && rb.velocity.y >= -0.00001f)
             {
-                float stopMoveRate = 0.99f;
+                float stopMoveRate = 0.99f; //매 프레임당 현재속도의 0.99배로 만듦
 
                 rb.velocity = new Vector3(rb.velocity.x * stopMoveRate, rb.velocity.y, rb.velocity.z * stopMoveRate);
 
@@ -297,12 +383,6 @@ public class Ball : MonoBehaviour
                 acceleration.z = 0;
 
             // 컨트롤을 통한 이동속도의 변화 적용
-            try{
-            }
-            catch (UnassignedReferenceException)
-            {
-
-            }
             if (!float.IsNaN(acceleration.x) && !float.IsNaN(acceleration.y) && !float.IsNaN(acceleration.z))
             {
                 rb.velocity += acceleration;
