@@ -23,9 +23,9 @@ public class Ball : MonoBehaviour
     /* state */
     Vector3 acceleration; //한 프레임마다 업데이트할 공의 속도 변화량
     float speed; //공의 z축 속력... 문은 z축으로 부딪힐 수 있으며, 그 속도에 비례하여 피해량을 계산함
-    bool canJump; // 점프가 가능한가?
-    bool canMove; // 움직일 수 있는가? (점프 중에는 움직임 불가)
-    bool neverMove; // 연출에 의해 움직임을 정지시키기 위함
+    public bool canJump; // 점프가 가능한가?
+    public bool canMove; // 움직일 수 있는가? (점프 중에는 움직임 불가)
+    public bool neverMove; // 연출에 의해 움직임을 정지시키기 위함
 
     /* ability */
     public float speedRate; //공의 이동속도를 나타내는 스탯... 기본 1로 지정
@@ -53,6 +53,7 @@ public class Ball : MonoBehaviour
 
         if(other.gameObject.tag == "ground")
         {
+            Debug.Log("ground Entered!");
             canMove = true;
             canJump = true;
         }
@@ -94,6 +95,7 @@ public class Ball : MonoBehaviour
         {
             Debug.Log("Fall !");
             canMove = false;
+            canJump = false;
             Invoke("FallingDead", 2);
 
             SoundManager.Instance.PlayFallSound();
@@ -102,12 +104,11 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "ground")
-        {
-            Debug.Log("ground");
-            canJump = true;
-            canMove = true;
-        }
+        //if (other.gameObject.tag == "ground")
+        //{
+        //    canJump = true;
+        //    canMove = true;
+        //}
 
 
         // 늪지대를 밟고있다면 이동속도 및 최대 이동속도 감소
@@ -230,9 +231,13 @@ public class Ball : MonoBehaviour
     //문 충돌 이후, 게임이 끝나지 않았다면 시작지점으로 복귀
     void CrashToDoor()
     {
+        // 게임이 안 끝난 경우
         if (!FindObjectOfType<ui_manager>().isStageOver)
         {
-            neverMove = true;
+            neverMove = false;
+            canMove = false;
+            canJump = false;
+
             gameObject.transform.position = startPos;
             rb.velocity = new Vector3(0, 0, 0);
             rb.angularVelocity = new Vector3(0, 0, 0);
@@ -251,17 +256,6 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
-        // 점프
-        // FixedUpdate에 넣으면 가끔 점프가 먹히지 않을 때가 있어 update에 넣었음
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
-        {
-            rb.velocity += new Vector3(0, 5, 0);
-            canMove = false;
-            canJump = false;
-
-            SoundManager.Instance.PlayJumpSound(); //점프할 때 재생
-        }
-
         // 공의 현재 z축 속력
         speed = rb.velocity.z;
     }
@@ -300,6 +294,17 @@ public class Ball : MonoBehaviour
          */
         if(canMove && !neverMove) {
             acceleration = new Vector3(0, 0, 0);
+
+            // 점프
+            if (Input.GetKey(KeyCode.Space) && canJump)
+            {
+                canJump = false;
+                canMove = false;
+                rb.velocity += new Vector3(0, 5, 0);
+                Debug.Log("jump!");
+
+                SoundManager.Instance.PlayJumpSound(); //점프할 때 재생
+            }
 
             // 전진 관련
             if (Input.GetKey(KeyCode.W))

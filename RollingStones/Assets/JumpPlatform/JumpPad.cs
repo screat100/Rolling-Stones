@@ -15,6 +15,9 @@ public class JumpPad : MonoBehaviour
             Ball.velocity = gameObject.transform.forward * 5;
             Ball.velocity += new Vector3(0, transform.up.y, 0) * move;
 
+            // 점프대 작동 중에는 플레이어의 움직임 제한
+            other.GetComponent<Ball>().canMove = false;
+            other.GetComponent<Ball>().canJump = false;
         }
     }
 }
