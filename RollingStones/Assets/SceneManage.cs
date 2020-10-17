@@ -35,5 +35,9 @@ public class SceneManage : MonoBehaviour
     {
         SceneManager.LoadScene("SelectStage");
     }
+    public void GoToTestStage()
+    {
+        SceneManager.LoadScene("TestStage");
+    }
 
 }
