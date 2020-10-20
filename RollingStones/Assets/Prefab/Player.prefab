@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140613cf04aefec4eba1b3fbaacda082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  cam: {fileID: 7056138564282638831, guid: ec6331f14d26157459ebd559294eeaf9, type: 3}
   canJump: 0
   canMove: 0
   neverMove: 0

@@ -96,6 +96,7 @@ public class Ball : MonoBehaviour
             Debug.Log("Fall !");
             canMove = false;
             canJump = false;
+            neverMove = true;
             Invoke("FallingDead", 2);
 
             SoundManager.Instance.PlayFallSound();
@@ -138,7 +139,7 @@ public class Ball : MonoBehaviour
     {
         if (!FindObjectOfType<ui_manager>().isStageOver)
         {
-            canMove = true;
+            neverMove = false;
             gameObject.transform.position = startPos;
             rb.velocity = new Vector3(0, 0, 0);
             rb.angularVelocity = new Vector3(0, 0, 0);
