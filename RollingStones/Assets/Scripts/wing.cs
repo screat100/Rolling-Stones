@@ -15,4 +15,15 @@ public class wing : MonoBehaviour
     {
         gameObject.transform.localRotation *= Quaternion.Euler(0, 1, 0);
     }
+
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.name == "Player")
+    //    {
+    //        Rigidbody ballRG = other.gameObject.GetComponent<Rigidbody>();
+    //        Rigidbody wingRG = gameObject.GetComponent<Rigidbody>();
+    //        ballRG.velocity += new Vector3(gameObject.transform.localRotation.x, 0, gameObject.transform.localRotation.z);
+    //        ballRG.velocity += wingRG.velocity;
+    //    }
+    //}
 }

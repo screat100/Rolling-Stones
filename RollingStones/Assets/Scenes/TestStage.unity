@@ -344,6 +344,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3835960609641937243, guid: 663293c1fdd475743853794c47720338,
+        type: 3}
+      propertyPath: PropellerSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1f09389309145224fa7cfc200ea61c41, type: 3}
     - target: {fileID: 4886482206623971637, guid: 663293c1fdd475743853794c47720338,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -426,6 +431,7 @@ MonoBehaviour:
   WallSound: {fileID: 8300000, guid: 93f63bf698e6edc48ab9cab02cedc094, type: 3}
   SwampSound: {fileID: 8300000, guid: 8f15db0e6a90d5d4b8157faba165125c, type: 3}
   BoosterSound: {fileID: 8300000, guid: 3e51636fab6080a489f37864d321a280, type: 3}
+  PropellerSound: {fileID: 0}
 --- !u!81 &1248766123
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1332,6 +1338,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Propeller
+      objectReference: {fileID: 0}
+    - target: {fileID: 7534448811085883740, guid: a46c8bcf1fbc9dc40b2c3535e83fd488,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a46c8bcf1fbc9dc40b2c3535e83fd488, type: 3}
