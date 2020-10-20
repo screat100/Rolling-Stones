@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class propeller : MonoBehaviour
 {
-    float Speed = 50.0f;
+    //float Speed = 50.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,11 +16,11 @@ public class propeller : MonoBehaviour
     {
         
     }
-    void OnColliderEnter(Collider hit)
+    void OnTriggerEnter(Collider other)
     {
-        //if (hit.gameObject.name == "Player")
+        //if (other.gameObject.name == "Player")
         //{
-        //    Rigidbody ballRG = hit.gameObject.GetComponent<Rigidbody>();
+        //    Rigidbody ballRG = other.gameObject.GetComponent<Rigidbody>();
         //    ballRG.velocity += new Vector3(transform.forward.x * Speed, 0, transform.forward.z * Speed);
         //}
     }

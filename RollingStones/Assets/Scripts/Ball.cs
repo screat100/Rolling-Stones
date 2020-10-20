@@ -97,8 +97,8 @@ public class Ball : MonoBehaviour
             canMove = false;
             canJump = false;
             neverMove = true;
-            Invoke("FallingDead", 2);
 
+            Invoke("FallingDead", 2);
             SoundManager.Instance.PlayFallSound();
         }
     }
@@ -168,8 +168,7 @@ public class Ball : MonoBehaviour
             rb.angularVelocity = new Vector3(0, 0, 0);
         }
     }
-
-
+   
     void Update()
     {
         // 공의 현재 z축 속력
