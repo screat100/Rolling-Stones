@@ -100,6 +100,8 @@ public class Ball : MonoBehaviour
 
             Invoke("FallingDead", 2);
             SoundManager.Instance.PlayFallSound();
+            fadeinout.Fadeinout.FadeInImage();
+            //fadeinout.Fadeinout.FadeOutImage();
         }
     }
 
@@ -140,6 +142,7 @@ public class Ball : MonoBehaviour
         if (!FindObjectOfType<ui_manager>().isStageOver)
         {
             neverMove = false;
+            fadeinout.Fadeinout.FadeOutImage();
             gameObject.transform.position = startPos;
             rb.velocity = new Vector3(0, 0, 0);
             rb.angularVelocity = new Vector3(0, 0, 0);

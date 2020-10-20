@@ -1073,7 +1073,7 @@ GameObject:
   - component: {fileID: 930518409}
   - component: {fileID: 930518408}
   m_Layer: 0
-  m_Name: FadeManage
+  m_Name: FadeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1092,7 +1092,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Fade: {fileID: 1448811638}
-  FadeTime: 2
+  FadeInTime: 1
+  FadeOutTime: 0.5
 --- !u!4 &930518409
 Transform:
   m_ObjectHideFlags: 0
