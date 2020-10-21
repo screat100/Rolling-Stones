@@ -45,6 +45,7 @@ public class Ball : MonoBehaviour
         /* ability */
         speedRate = 1.0f;
         maxSpeed = 30;
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,7 +58,6 @@ public class Ball : MonoBehaviour
             canMove = true;
             canJump = true;
         }
-
 
         // 늪지대에 들어가는 순간 현재 속도를 줄인다
         if (other.gameObject.tag == "swamp")
@@ -90,6 +90,12 @@ public class Ball : MonoBehaviour
 
         }
 
+        if (other.gameObject.tag == "wall")
+        {
+            Debug.Log("bumped into wall !");
+            SoundManager.Instance.PlayWallSound(); //벽 부딪혔을 때 소리 재생
+        }
+
         // 추락지역에 떨어지면 최초 시작지점으로 이동
         if (other.gameObject.tag == "fall")
         {
@@ -103,6 +109,15 @@ public class Ball : MonoBehaviour
             fadeinout.Fadeinout.FadeInImage();
             //fadeinout.Fadeinout.FadeOutImage();
         }
+
+        if (other.gameObject.tag == "ground")
+        {
+            if (rb.velocity.magnitude > 0)
+            {
+                SoundManager.Instance.PlayBallSound();
+            }
+        }
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -121,6 +136,17 @@ public class Ball : MonoBehaviour
             speedRate = 1.0f;
             maxSpeed = 30;
         }
+
+
+        if (other.gameObject.tag == "ground")
+        {
+            if(speedRate> 1.0f)
+            {
+                SoundManager.Instance.PlayBallSound();
+            }
+            
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -132,6 +158,7 @@ public class Ball : MonoBehaviour
             canJump = false;
             canMove = false;
         }
+        
     }
 
 
@@ -180,6 +207,7 @@ public class Ball : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         /*
          * 카메라가 바라보는 방향에 대한 코드
          * 카메라가 바라보는 방향을 기준으로 y값은 0으로 만들고, (x, z) 값은 정규화해준다. (x^2 + z^2 = 1)

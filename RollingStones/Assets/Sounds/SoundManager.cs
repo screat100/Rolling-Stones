@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
 
-    public AudioClip JumpSound, DoorSound, MainMusic, FallSound, WallSound, SwampSound, BoosterSound, PropellerSound;
+    public AudioClip JumpSound, DoorSound, MainMusic, FallSound, WallSound, SwampSound, BoosterSound, PropellerSound, BallSound;
     AudioSource MyAudio;
     public static SoundManager Instance;
+    public bool isPlaying;
 
     // Start is called before the first frame update
 
@@ -20,6 +22,7 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         MyAudio = GetComponent<AudioSource>();
+        isPlaying = false;
     }
 
     public void PlayMainMusic()
@@ -28,6 +31,20 @@ public class SoundManager : MonoBehaviour
         MyAudio.loop = true;
         MyAudio.Play();
     }
+
+    public void PlayBallSound()
+    {
+        
+        if (isPlaying == false)
+        {
+            isPlaying = true;
+            MyAudio.PlayOneShot(BallSound,0.3f);
+        }
+
+        isPlaying = false;
+
+    }
+
     public void PlayJumpSound()
     {
         MyAudio.PlayOneShot(JumpSound);
@@ -59,6 +76,8 @@ public class SoundManager : MonoBehaviour
     {
         MyAudio.PlayOneShot(PropellerSound);
     }
+
+
     // Update is called once per frame
     void Update()
     {
