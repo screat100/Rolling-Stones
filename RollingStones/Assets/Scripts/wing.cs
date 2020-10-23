@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class wing : MonoBehaviour
 {
+    public float wingSpeed=0.2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +14,7 @@ public class wing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.localRotation *= Quaternion.Euler(0, 0.3f, 0);
+        gameObject.transform.localRotation *= Quaternion.Euler(0, wingSpeed, 0);
     }
 
     //void OnTriggerEnter(Collider other)

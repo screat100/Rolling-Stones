@@ -52,7 +52,7 @@ public class Ball : MonoBehaviour
     {
         float damage = (int)(speed);
 
-        if(other.gameObject.tag == "ground")
+        if(other.gameObject.tag == "ground"||other.gameObject.tag == "Booster")
         {
             Debug.Log("ground Entered!");
             canMove = true;
@@ -106,7 +106,7 @@ public class Ball : MonoBehaviour
 
             Invoke("FallingDead", 2);
             SoundManager.Instance.PlayFallSound();
-            fadeinout.Fadeinout.FadeInImage();
+            //fadeinout.Fadeinout.FadeInImage();
             //fadeinout.Fadeinout.FadeOutImage();
         }
 
@@ -152,7 +152,7 @@ public class Ball : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         // (점프, 추락 등의 이유로) 바닥에서 떨어지면 점프 불가능
-        if (other.gameObject.tag == "ground")
+        if (other.gameObject.tag == "ground"||other.gameObject.tag == "Booster")
         {
             Debug.Log("ground exit!");
             canJump = false;
@@ -169,7 +169,7 @@ public class Ball : MonoBehaviour
         if (!FindObjectOfType<ui_manager>().isStageOver)
         {
             neverMove = false;
-            fadeinout.Fadeinout.FadeOutImage();
+            //fadeinout.Fadeinout.FadeOutImage();
             gameObject.transform.position = startPos;
             rb.velocity = new Vector3(0, 0, 0);
             rb.angularVelocity = new Vector3(0, 0, 0);
