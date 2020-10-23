@@ -2428,6 +2428,16 @@ PrefabInstance:
       propertyPath: horizontalMoveRate
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6795501262455157055, guid: 6569712e9a3d0784c8b74eecdf153ddc,
+        type: 3}
+      propertyPath: verticalMoveRate
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795501262455157055, guid: 6569712e9a3d0784c8b74eecdf153ddc,
+        type: 3}
+      propertyPath: horizontalMoveRate
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 8863153828503193619, guid: 6569712e9a3d0784c8b74eecdf153ddc,
         type: 3}
       propertyPath: m_Name
