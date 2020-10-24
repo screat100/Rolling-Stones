@@ -38,7 +38,7 @@ public class SoundManager : MonoBehaviour
         if (isPlaying == false)
         {
             isPlaying = true;
-            MyAudio.PlayOneShot(BallSound,0.3f);
+            //MyAudio.PlayOneShot(BallSound,0.3f);
         }
 
         isPlaying = false;
