@@ -8,8 +8,9 @@ using JetBrains.Annotations;
 
 public class ui_manager : MonoBehaviour
 {
+    public int stage; //현재가 몇 스테이지인지
     float time; // 스테이지 플레이시간
-    public bool isStageOver; // 스테이지가 끝났는지 여부 판별
+    public bool isStageOver; // 스테이지 종료 여부
 
     public Text StageNumber;
     public Text TimeUI;
@@ -18,6 +19,8 @@ public class ui_manager : MonoBehaviour
     public GameObject ResultPopup;
     Text damageFont;
 
+    public int starTime5, starTime4, starTime3, starTime2;
+
 
     void Start()
     {
@@ -25,14 +28,16 @@ public class ui_manager : MonoBehaviour
         StageNumber.text = SceneManager.GetActiveScene().name;
                 
         ResultPopup.SetActive(false);
+
+        // damage font
         damageFont = gameObject.transform.Find("DamageFont").GetComponent<Text>();
         damageFont.gameObject.SetActive(false);
-        time =0f;
+
+        time =0f; // Playtime
     }
 
     void Update()
     {
-
         // 시계 관련 코드
         if(!isStageOver)
             time += Time.deltaTime;
@@ -48,22 +53,29 @@ public class ui_manager : MonoBehaviour
         int BallSpeed = (int)(GameObject.Find("Player").GetComponent<Rigidbody>().velocity.magnitude);
         Speed.text = BallSpeed.ToString();
 
-        // 스테이지 종료 시 결과 팝업을 띄움
-        if(isStageOver)
-        {
-            string star;
+    }
 
-            // 클리어 시간에 따라 다른 별점 부여
-            if(time<=70)                star = "★★★★★";
-            else if (time <= 90)        star = "★★★★☆";
-            else if (time <= 110)       star = "★★★☆☆";
-            else if (time <= 130)       star = "★★☆☆☆";
-            else                        star = "★☆☆☆☆";
+    // 스테이지 종료 시 
+    public void stageClear()
+    {
+        isStageOver = true;
 
-            ResultPopup.SetActive(true);
-            ResultPopup.transform.Find("Time").GetComponent<Text>().text = TimeUI.text;
-            ResultPopup.transform.Find("Star").GetComponent<Text>().text = star;
-        }
+        /* 결과팝업 */
+        string star;
+
+        // 클리어 시간에 따라 다른 별점 부여
+        if (time <= starTime5) star = "★★★★★";
+        else if (time <= starTime4) star = "★★★★☆";
+        else if (time <= starTime3) star = "★★★☆☆";
+        else if (time <= starTime2) star = "★★☆☆☆";
+        else star = "★☆☆☆☆";
+
+        ResultPopup.SetActive(true);
+        ResultPopup.transform.Find("Time").GetComponent<Text>().text = TimeUI.text;
+        ResultPopup.transform.Find("Star").GetComponent<Text>().text = star;
+
+        /* 결과데이터 저장 */
+
     }
 
     public void DamageFontOn(float damage)
@@ -76,7 +88,6 @@ public class ui_manager : MonoBehaviour
 
     public void DamageFontOff()
     {
-
         damageFont.gameObject.SetActive(false);
     }
 

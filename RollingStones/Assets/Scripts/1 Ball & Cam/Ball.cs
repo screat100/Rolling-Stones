@@ -48,23 +48,10 @@ public class Ball : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         float damage = (int)(speed);
 
-        if(other.gameObject.tag == "ground"||other.gameObject.tag == "Booster")
-        {
-            Debug.Log("ground Entered!");
-            canMove = true;
-            canJump = true;
-        }
-
-        // 늪지대에 들어가는 순간 현재 속도를 줄인다
-        if (other.gameObject.tag == "swamp")
-        {
-            rb.velocity *= 0.5f;
-            SoundManager.Instance.PlaySwampSound();
-        }
 
         /* 성문 충돌 관련 코드
          * 문 hp 감소
@@ -75,6 +62,7 @@ public class Ball : MonoBehaviour
          */
         if (other.gameObject.tag == "door")
         {
+
             Debug.Log("쾅! " + damage);
             other.gameObject.GetComponent<DoorStat>().DoorTakeDamage(damage); // 속도비례 데미지 주기!
 
@@ -96,6 +84,19 @@ public class Ball : MonoBehaviour
             SoundManager.Instance.PlayWallSound(); //벽 부딪혔을 때 소리 재생
         }
 
+
+        if (other.gameObject.tag == "ground")
+        {
+            if (rb.velocity.magnitude > 0)
+            {
+                SoundManager.Instance.PlayBallSound();
+            }
+        }
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
         // 추락지역에 떨어지면 최초 시작지점으로 이동
         if (other.gameObject.tag == "fall")
         {
@@ -109,47 +110,25 @@ public class Ball : MonoBehaviour
             //fadeinout.Fadeinout.FadeInImage();
             //fadeinout.Fadeinout.FadeOutImage();
         }
-
-        if (other.gameObject.tag == "ground")
-        {
-            if (rb.velocity.magnitude > 0)
-            {
-                SoundManager.Instance.PlayBallSound();
-            }
-        }
-
     }
 
-    private void OnTriggerStay(Collider other)
+
+    private void OnCollisionStay(Collision other)
     {
-
-        // 늪지대를 밟고있다면 이동속도 및 최대 이동속도 감소
-        if (other.gameObject.tag == "swamp")
-        {
-            canJump = false;
-            speedRate = 0.5f;
-            maxSpeed = 15;
-        }
-
-        else
-        {
-            speedRate = 1.0f;
-            maxSpeed = 30;
-        }
-
-
         if (other.gameObject.tag == "ground")
         {
-            if(speedRate> 1.0f)
+            canMove = true;
+            canJump = true;
+
+            if (speedRate> 1.0f)
             {
                 SoundManager.Instance.PlayBallSound();
             }
-            
         }
 
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionExit(Collision other)
     {
         // (점프, 추락 등의 이유로) 바닥에서 떨어지면 점프 불가능
         if (other.gameObject.tag == "ground"||other.gameObject.tag == "Booster")
@@ -158,7 +137,6 @@ public class Ball : MonoBehaviour
             canJump = false;
             canMove = false;
         }
-        
     }
 
 
@@ -201,6 +179,16 @@ public class Ball : MonoBehaviour
    
     void Update()
     {
+        // 점프
+        if (Input.GetKeyDown(KeyCode.Space) && canJump && !neverMove)
+        {
+            canJump = false;
+            canMove = false;
+            rb.velocity += new Vector3(0, 5, 0);
+            Debug.Log("jump!");
+
+            SoundManager.Instance.PlayJumpSound(); //점프할 때 재생
+        }
         // 공의 현재 z축 속력
         speed = rb.velocity.z;
     }
@@ -241,16 +229,6 @@ public class Ball : MonoBehaviour
         if(canMove && !neverMove) {
             acceleration = new Vector3(0, 0, 0);
 
-            // 점프
-            if (Input.GetKey(KeyCode.Space) && canJump)
-            {
-                canJump = false;
-                canMove = false;
-                rb.velocity += new Vector3(0, 5, 0);
-                Debug.Log("jump!");
-
-                SoundManager.Instance.PlayJumpSound(); //점프할 때 재생
-            }
 
             // 전진 관련
             if (Input.GetKey(KeyCode.W))

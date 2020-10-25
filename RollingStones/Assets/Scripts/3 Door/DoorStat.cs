@@ -18,9 +18,9 @@ public class DoorStat : MonoBehaviour
 
     void Update()
     {
-        if(HP <= 0)
+        if(HP <= 0 && !FindObjectOfType<ui_manager>().isStageOver)
         {
-            FindObjectOfType<ui_manager>().isStageOver = true;
+            FindObjectOfType<ui_manager>().stageClear();
         }    
     }
 
