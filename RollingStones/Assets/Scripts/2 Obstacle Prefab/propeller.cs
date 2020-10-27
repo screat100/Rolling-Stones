@@ -15,12 +15,12 @@ public class propeller : MonoBehaviour
     {
 
     }
-    //void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.name == "Player")
-    //    {
-    //        Rigidbody ballRG = other.gameObject.GetComponent<Rigidbody>();
-    //        ballRG.velocity -= new Vector3(transform.forward.x, 0, transform.forward.z);
-    //    }
-    //}
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Player")
+        {
+            Rigidbody ballRG = other.gameObject.GetComponent<Rigidbody>();
+            ballRG.velocity += -transform.forward;
+        }
+    }
 }

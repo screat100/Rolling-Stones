@@ -170,6 +170,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &382197059 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7534448810787494635, guid: a46c8bcf1fbc9dc40b2c3535e83fd488,
+    type: 3}
+  m_PrefabInstance: {fileID: 7534448811853863158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &382197061
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382197059}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1001 &389322586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -277,7 +297,7 @@ PrefabInstance:
     - target: {fileID: 1344896881315099000, guid: 14faa701edc0d394cb22f628f65cd676,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.8690901
+      value: -1.7
       objectReference: {fileID: 0}
     - target: {fileID: 1344896881315099000, guid: 14faa701edc0d394cb22f628f65cd676,
         type: 3}
@@ -432,6 +452,8 @@ MonoBehaviour:
   SwampSound: {fileID: 8300000, guid: 8f15db0e6a90d5d4b8157faba165125c, type: 3}
   BoosterSound: {fileID: 8300000, guid: 3e51636fab6080a489f37864d321a280, type: 3}
   PropellerSound: {fileID: 0}
+  BallSound: {fileID: 0}
+  isPlaying: 0
 --- !u!81 &1248766123
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1279,6 +1301,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 298676620}
     m_Modifications:
+    - target: {fileID: 7534448809966043198, guid: a46c8bcf1fbc9dc40b2c3535e83fd488,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7534448810787494632, guid: a46c8bcf1fbc9dc40b2c3535e83fd488,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1338,6 +1365,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Propeller
+      objectReference: {fileID: 0}
+    - target: {fileID: 7534448811058690116, guid: a46c8bcf1fbc9dc40b2c3535e83fd488,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7534448811085883740, guid: a46c8bcf1fbc9dc40b2c3535e83fd488,
         type: 3}

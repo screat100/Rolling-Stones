@@ -17,10 +17,6 @@ public class fadeinout : MonoBehaviour
             fadeinout.Fadeinout = this;
     }
 
-    void Sart()
-    {
-        Fade = GetComponent<Image>();
-    }
     public void FadeInImage()//불투명
     {
         if (isPlaying == true) //중복재생방지
