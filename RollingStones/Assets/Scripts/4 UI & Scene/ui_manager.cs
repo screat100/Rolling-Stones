@@ -76,9 +76,8 @@ public class ui_manager : MonoBehaviour
         ResultPopup.transform.Find("Star").GetComponent<Text>().text = star;
 
         /* 결과데이터 저장 */
-
-        Ghost.Instance.CheckGhost();
         InputRank(StageNumber,time);
+        //Ghost.Instance.CheckGhost();
     }
 
     public void DamageFontOn(float damage)
@@ -99,7 +98,7 @@ public class ui_manager : MonoBehaviour
     {
         string m_strPath = "Assets/RankInfo/";
 
-        List<float> Rank=new List<float>();
+        List<float>Rank=new List<float>();
 
         StreamReader Readfile = new StreamReader(m_strPath  + "RankInfo"+Stage.text+".txt");
         //랭크 시간이 저장된 파일을 불러들어 읽고 내 스테이지 클리어 시간을 삽입후 정렬.
@@ -109,12 +108,14 @@ public class ui_manager : MonoBehaviour
             if(str!=" ")
                 Rank.Add(float.Parse(str));
         }
-
+        
         Rank.Add(mytime);
         Readfile.Close();
 
         Rank.Sort();
-
+        for(int i=0;i<5;i++){
+            Debug.Log(Rank[i]);
+        }
         FileStream  f = new FileStream( m_strPath  + "RankInfo"+Stage.text+".txt", FileMode.Truncate, FileAccess.Write);
         //정렬된 정렬된 벡터를 다시 파일에 다시 써주기!
         StreamWriter writer = new StreamWriter(f, System.Text.Encoding.Unicode);
