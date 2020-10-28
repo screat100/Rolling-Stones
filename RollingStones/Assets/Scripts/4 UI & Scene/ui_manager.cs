@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 public class ui_manager : MonoBehaviour
 {
     public int stage; //현재가 몇 스테이지인지
-    float time; // 스테이지 플레이시간
+    public float time; // 스테이지 플레이시간
     public bool isStageOver; // 스테이지 종료 여부
 
     public Text StageNumber;
@@ -76,6 +76,7 @@ public class ui_manager : MonoBehaviour
 
         /* 결과데이터 저장 */
 
+        Ghost.Instance.CheckGhost();
     }
 
     public void DamageFontOn(float damage)
