@@ -76,8 +76,6 @@
     <Compile Include="Assets\Scripts\4 UI &amp; Scene\ui_manager.cs" />
     <Compile Include="Assets\Scripts\5 Director\Ghost.cs" />
     <Compile Include="Assets\Scripts\5 Director\Ghost2.cs" />
-    <Compile Include="Assets\Scripts\5 Director\Ghost_move.cs" />
-    <Compile Include="Assets\Scripts\5 Director\Ghost_tag.cs" />
     <Compile Include="Assets\Scripts\5 Director\fadeinout.cs" />
     <Compile Include="Assets\Scripts\6 Data\RankManagement.cs" />
     <Compile Include="Assets\Scripts\6 Data\Record.cs" />

@@ -57,7 +57,7 @@ public class quaternion_Vector3
 [System.Serializable]
 public class GhostShot
 {
-    public float timeMark = 0.0f;       // mark at which the position and rotation are of af a given shot
+    public float timeMark = 0.0f;
     private location_Vector3 _posMark;
     public Vector3 posMark
     {
@@ -108,12 +108,10 @@ public class Ghost : MonoBehaviour
     float bestrecord_time;
     public float nowPlayingtime; // 스테이지 플레이시간
     public bool isStageOver; // 스테이지 종료 여부
-    //Check whether we should be recording or not
-    bool startRecording = false, recordingFrame = false, isGhostActivate = false;
+    bool isRecording = false, recordingFrame = false, isGhostActivate = false;
 
     public void loadFromFile()
     {
-        //Check if Ghost file exists. If it does load it
         if (File.Exists(Application.persistentDataPath + "/Ghost"))
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -123,7 +121,7 @@ public class Ghost : MonoBehaviour
         }
         else
         {
-            Debug.Log("No Ghost Found");
+            Debug.Log("No Ghost Found"); 
         }
     }
 
@@ -134,7 +132,6 @@ public class Ghost : MonoBehaviour
         isGhostActivate = false;
         StartRecording();
          
-        // isGhostActivate를 체크하기 : 기록에서 확인한다.
     }
 
     void Update()
@@ -169,12 +166,7 @@ public class Ghost : MonoBehaviour
 
     void FixedUpdate()
     {
-        //if (startRecording)
-        //{
-        //    startRecording = false;
-        //    //Debug.Log("Recording Started");
-        //    StartRecording();
-        // }
+
         if (recordingFrame)
         {
             RecordFrame();
@@ -212,9 +204,8 @@ public class Ghost : MonoBehaviour
         recordingFrame = false;
         lastReplayList = new List<GhostShot>(frameList);
 
-        //This will overwrite any previous Save
-        SelectBestrecord();//Run function if new highscore achieved or change filename in function
-        //SaveGhostToFile(); //Save Ghost to file on device/computer
+        SelectBestrecord();
+        //SaveGhostToFile();
     }
 
     public void playGhostRecording()
@@ -226,7 +217,7 @@ public class Ghost : MonoBehaviour
 
     public void StartRecordingGhost()
     {
-        startRecording = true;
+        isRecording = true;
     }
 
     public void MoveGhost()
@@ -252,18 +243,16 @@ public class Ghost : MonoBehaviour
 
     public void SaveGhostToFile()
     {
-        // Prepare to write
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/Ghost");
         Debug.Log("File Location: " + Application.persistentDataPath + "/Ghost");
-        // Write data to disk
+
         bf.Serialize(file, lastReplayList);
         file.Close();
     }
 
     public void CreateGhost()
-    {
-        //Check if ghost exists or not, no reason to destroy and create it everytime.
+    { 
         if (GameObject.FindWithTag("Ghost") == null)
         {
             theGhost = Instantiate(Resources.Load("GhostPrefab", typeof(GameObject))) as GameObject;
