@@ -1,90 +1,280 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+
+[System.Serializable]
+public class location_Vector3
+{
+    private float x;
+    private float y;
+    private float z;
+
+    public location_Vector3() { }
+    public location_Vector3(Vector3 vec3)
+    {
+        this.x = vec3.x;
+        this.y = vec3.y;
+        this.z = vec3.z;
+    }
+    public static implicit operator location_Vector3(Vector3 vec3)
+    {
+        return new location_Vector3(vec3);
+    }
+    public static explicit operator Vector3(location_Vector3 wb_vec3)
+    {
+        return new Vector3(wb_vec3.x, wb_vec3.y, wb_vec3.z);
+    }
+}
+
+[System.Serializable]
+public class quaternion_Vector3
+{
+    private float w;
+    private float x;
+    private float y;
+    private float z;
+
+    public quaternion_Vector3() { }
+    public quaternion_Vector3(Quaternion quat3)
+    {
+        this.x = quat3.x;
+        this.y = quat3.y;
+        this.z = quat3.z;
+        this.w = quat3.w;
+    }
+    public static implicit operator quaternion_Vector3(Quaternion quat3)
+    {
+        return new quaternion_Vector3(quat3);
+    }
+    public static explicit operator Quaternion(quaternion_Vector3 wb_quat3)
+    {
+        return new Quaternion(wb_quat3.x, wb_quat3.y, wb_quat3.z, wb_quat3.w);
+    }
+}
+
+[System.Serializable]
+public class GhostShot
+{
+    public float timeMark = 0.0f;       // mark at which the position and rotation are of af a given shot
+    private location_Vector3 _posMark;
+    public Vector3 posMark
+    {
+        get
+        {
+            if (_posMark == null)
+                return Vector3.zero;
+            else
+                return (Vector3)_posMark;
+        }
+        set
+        {
+            _posMark = (location_Vector3)value;
+        }
+    }
+
+    private quaternion_Vector3 _rotMark;
+    public Quaternion rotMark
+    {
+        get
+        {
+            if (_rotMark == null)
+                return Quaternion.identity;
+            else
+                return (Quaternion)_rotMark;
+        }
+        set
+        {
+            _rotMark = (quaternion_Vector3)value;
+        }
+    }
+
+}
+
 
 
 public class Ghost : MonoBehaviour
 {
-    bool isGhostActivate;
+    private List<GhostShot> frameList;
+    private List<GhostShot> lastReplayList = null;
 
-    //ArrayList ghostPos = new ArrayList();
-    //ArrayList ghostRot = new ArrayList();
+    GameObject theGhost;
 
-    //ArrayList ghostBackupPos = new ArrayList();
-    //ArrayList ghostBackupRot = new ArrayList();
+    private float replayTimescale = 1;
+    private int replayIndex = 0;
+    private float recordTime = 0.0f;
+    private float replayTime = 0.0f;
+    float bestrecord_time;
+    public float nowPlayingtime; // 스테이지 플레이시간
+    public bool isStageOver; // 스테이지 종료 여부
+    //Check whether we should be recording or not
+    bool startRecording = false, recordingFrame = false, isGhostActivate = false;
 
-    public Vector3[] ghostBackupPos = new Vector3[9000];
-   // public Vector3[] ghostBackupRot = new Vector3[9000];
-    public Vector3[] ghostPos = new Vector3[9000];
-  //  public Vector3[] ghostRot = new Vector3[9000];
-
-    int time;
-
-    float record_time, bestrecord_time;
-
-    public ui_manager _ui_manage;
-    public static Ghost Instance;
+    public void loadFromFile()
+    {
+        //Check if Ghost file exists. If it does load it
+        if (File.Exists(Application.persistentDataPath + "/Ghost"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/Ghost", FileMode.Open);
+            lastReplayList = (List<GhostShot>)bf.Deserialize(file);
+            file.Close();
+        }
+        else
+        {
+            Debug.Log("No Ghost Found");
+        }
+    }
 
     void Start()
     {
 
-        time = 0;
         bestrecord_time = 300;
         isGhostActivate = false;
-
+        StartRecording();
+         
         // isGhostActivate를 체크하기 : 기록에서 확인한다.
     }
 
-    void Awake()
+    void Update()
     {
-        Application.targetFrameRate = 30;
+        if (!isStageOver)
+            nowPlayingtime += Time.deltaTime;
+
     }
-
-
-    // 스테이지가 종료되면 실행한다.
-    public void CheckGhost()
+ 
+    public void SelectBestrecord()
     {
-       // ui_manager _ui_manage;
-        record_time = _ui_manage.time;
-
-        if (bestrecord_time >= record_time)
+        if (bestrecord_time > nowPlayingtime)
         {
             isGhostActivate = true;
-            bestrecord_time = record_time;
-            ghostPos[time] = ghostBackupPos[time];
-            //ghostRot[time] = ghostBackupRot[time];
+            bestrecord_time = nowPlayingtime;
+            SaveGhostToFile();
         }
         else
         {
             isGhostActivate = false;
-            ghostBackupPos = null;
-           // ghostBackupRot= null;
         }
 
+    }
+
+    public void CheckGhost()
+    {
+        if (lastReplayList != null && isGhostActivate)
+        {
+            MoveGhost();
+        }
     }
 
     void FixedUpdate()
     {
-        Debug.Log(ghostBackupPos[time]);
-        time++;
-
-        //기록
-
-        ghostBackupPos[time] = GameObject.Find("Player").transform.position;
-        //ghostBackupRot[time] = GameObject.Find("Player").transform.rotation;
-        //ghostBackupPos.Insert(time, GameObject.Find("Player").transform.position);
-        //ghostBackupRot.Insert(time, GameObject.Find("Player").transform.rotation);
-
-        //고스트가 활성화되어있다면
-        if (isGhostActivate)
+        //if (startRecording)
+        //{
+        //    startRecording = false;
+        //    //Debug.Log("Recording Started");
+        //    StartRecording();
+        // }
+        if (recordingFrame)
         {
-            gameObject.transform.position = (Vector3)ghostPos[time];
-           // gameObject.transform.rotation = (Quaternion)ghostRot[time];
+            RecordFrame();
         }
-
-
+        if (lastReplayList != null && isGhostActivate)
+        {
+            MoveGhost();
+        }
     }
 
-  
+    private void RecordFrame()
+    {
+        recordTime += Time.smoothDeltaTime * 1000;
+        GhostShot newFrame = new GhostShot()
+        {
+            timeMark = recordTime,
+            posMark = this.transform.position,
+            rotMark = this.transform.rotation
+        };
+
+        frameList.Add(newFrame);
+    }
+
+    public void StartRecording()
+    {
+        frameList = new List<GhostShot>();
+        replayIndex = 0;
+        recordTime = Time.time * 1000;
+        recordingFrame = true;
+        isGhostActivate = false;
+    }
+
+    public void StopRecordingGhost()
+    {
+        recordingFrame = false;
+        lastReplayList = new List<GhostShot>(frameList);
+
+        //This will overwrite any previous Save
+        SelectBestrecord();//Run function if new highscore achieved or change filename in function
+        //SaveGhostToFile(); //Save Ghost to file on device/computer
+    }
+
+    public void playGhostRecording()
+    {
+        CreateGhost();
+        replayIndex = 0;
+        isGhostActivate = true;
+    }
+
+    public void StartRecordingGhost()
+    {
+        startRecording = true;
+    }
+
+    public void MoveGhost()
+    {
+        replayIndex++;
+
+        if (replayIndex < lastReplayList.Count)
+        {
+            GhostShot frame = lastReplayList[replayIndex];
+            DoLerp(lastReplayList[replayIndex - 1], frame);
+            replayTime += Time.smoothDeltaTime * 1000 * replayTimescale;
+        }
+    }
+
+    private void DoLerp(GhostShot a, GhostShot b)
+    {
+        if (GameObject.FindWithTag("Ghost") != null)
+        {
+            theGhost.transform.position = Vector3.Slerp(a.posMark, b.posMark, Mathf.Clamp(replayTime, a.timeMark, b.timeMark));
+            theGhost.transform.rotation = Quaternion.Slerp(a.rotMark, b.rotMark, Mathf.Clamp(replayTime, a.timeMark, b.timeMark));
+        }
+    }
+
+    public void SaveGhostToFile()
+    {
+        // Prepare to write
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/Ghost");
+        Debug.Log("File Location: " + Application.persistentDataPath + "/Ghost");
+        // Write data to disk
+        bf.Serialize(file, lastReplayList);
+        file.Close();
+    }
+
+    public void CreateGhost()
+    {
+        //Check if ghost exists or not, no reason to destroy and create it everytime.
+        if (GameObject.FindWithTag("Ghost") == null)
+        {
+            theGhost = Instantiate(Resources.Load("GhostPrefab", typeof(GameObject))) as GameObject;
+            theGhost.gameObject.tag = "Ghost";
+
+            //Disable RigidBody
+            //theGhost.GetComponent<Rigidbody>().isKinematic = true;
+
+            MeshRenderer mr = theGhost.gameObject.GetComponent<MeshRenderer>();
+            mr.material = Resources.Load("ghost_material", typeof(Material)) as Material;
+        }
+    }
 
 }
