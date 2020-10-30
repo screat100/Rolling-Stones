@@ -5,7 +5,6 @@ using System.IO;
 using UnityEngine.UI;
 public class RankManagement : MonoBehaviour
 {
-    string m_strPath = "Assets/RankInfo/";
     public GameObject Stage;
     void Start()
     {
@@ -19,19 +18,37 @@ public class RankManagement : MonoBehaviour
     }
     public void OutputRankText(){
 
-        //스테이지별 RANKINFO를 불러와 출력
-        List<float> Rank=new List<float>(6);
         
-        StreamReader Readfile = new StreamReader(m_strPath  + "RankInfo"+Stage.name+".txt");
+        List<float> Rank=new List<float>(6);
+        string path = Application.persistentDataPath;
+        string filename="RankInfo"+Stage.name;
+
+        //로컬 데이터 생성 
+        //막판에 날 당황쓰 하게 만들었쓰~
+        if(!Directory.Exists(path + "/Save"))
+        {
+            Directory.CreateDirectory(path + "/Save");
+        }
+        if(!File.Exists(path + "/Save/"+filename+".txt")){
+            FileStream  f = new FileStream(path+"/Save/"+filename+".txt", FileMode.OpenOrCreate, FileAccess.Write);
+            StreamWriter writer = new StreamWriter(f, System.Text.Encoding.Unicode);
+            for (int i = 0; i < 5; i++){
+                    writer.WriteLine(float.MaxValue);
+            }
+            writer.Close();
+        }
+
+        //스테이지별 RANKINFO를 불러와 출력
+        //로컬 데이터에 저장된 정보 읽기
+        StreamReader Readfile = new StreamReader(Application.persistentDataPath  + "/Save/RankInfo"+Stage.name+".txt");
         while(!Readfile.EndOfStream){
             string str;
             str = Readfile.ReadLine();
             if(str!=" ")
                 Rank.Add(float.Parse(str));
-        }
-        Readfile.Close();
-        
-        
+         }
+
+        //UI출력
         for (int i=1;i<=5;i++)
         {
             string timeStr;

@@ -25,6 +25,7 @@ public class ui_manager : MonoBehaviour
 
     void Start()
     {
+        
         // 스테이지 넘버 관련 코드
         StageNumber.text = SceneManager.GetActiveScene().name;
 
@@ -67,6 +68,10 @@ public class ui_manager : MonoBehaviour
     {
         isStageOver = true;
 
+        /* 고스트 */
+        GameObject.Find("Ghost").GetComponent<Ghost>().isPlaying = false;
+        GameObject.Find("Ghost").GetComponent<Ghost>().SaveGhost(time);
+
         /* 결과팝업 */
         string star;
 
@@ -83,11 +88,10 @@ public class ui_manager : MonoBehaviour
         ResultPopup.transform.Find("Star").GetComponent<Text>().text = star;
 
         /* 결과데이터 저장 */
-        InputRank(StageNumber,time);
+        
+        InputRank(time);
 
-        /* 고스트 */
-        GameObject.Find("Ghost").GetComponent<Ghost>().isPlaying = false;
-        GameObject.Find("Ghost").GetComponent<Ghost>().SaveGhost(time);
+        
     }
 
     public void DamageFontOn(float damage)
@@ -104,27 +108,25 @@ public class ui_manager : MonoBehaviour
     }
 
     //결과 시간 RankInfo 저장
-    void InputRank(Text Stage,float mytime)
+    void InputRank(float mytime)
     {
-        string m_strPath = "Assets/RankInfo/";
 
         List<float>Rank=new List<float>();
-
-        StreamReader Readfile = new StreamReader(m_strPath  + "RankInfo"+Stage.text+".txt");
-        //랭크 시간이 저장된 파일을 불러들어 읽고 내 스테이지 클리어 시간을 삽입후 정렬.
+        string filename="RankInfo"+StageNumber.text;
+        StreamReader Readfile = new StreamReader(Application.persistentDataPath  + "/Save/"+filename+".txt");
         while(!Readfile.EndOfStream){
             string str;
             str = Readfile.ReadLine();
             if(str!=" ")
                 Rank.Add(float.Parse(str));
-        }
+         }
         
         Rank.Add(mytime);
         Readfile.Close();
 
         Rank.Sort();
 
-        FileStream  f = new FileStream( m_strPath  + "RankInfo"+Stage.text+".txt", FileMode.Truncate, FileAccess.Write);
+        FileStream  f = new FileStream(Application.persistentDataPath  + "/Save/"+filename+".txt", FileMode.Truncate, FileAccess.Write);
         //정렬된 정렬된 벡터를 다시 파일에 다시 써주기!
         StreamWriter writer = new StreamWriter(f, System.Text.Encoding.Unicode);
         for (int i = 0; i < 5; i++){
