@@ -35,6 +35,12 @@ public class ui_manager : MonoBehaviour
         damageFont.gameObject.SetActive(false);
 
         time =0f; // Playtime
+
+        /* Ghost */
+        GameObject.Find("Ghost").GetComponent<Ghost>().isPlaying = true;
+        GameObject.Find("Ghost").GetComponent<Ghost>().stage = stage;
+        if(GameObject.Find("Ghost").GetComponent<Ghost>().isPlaying && GameObject.Find("Ghost").GetComponent<Ghost>().stage == stage)
+            GameObject.Find("Ghost").GetComponent<Ghost>().RecordStart();
     }
 
     void Update()
@@ -78,6 +84,10 @@ public class ui_manager : MonoBehaviour
 
         /* 결과데이터 저장 */
         InputRank(StageNumber,time);
+
+        /* 고스트 */
+        GameObject.Find("Ghost").GetComponent<Ghost>().isPlaying = false;
+        GameObject.Find("Ghost").GetComponent<Ghost>().SaveGhost(time);
     }
 
     public void DamageFontOn(float damage)
@@ -113,9 +123,7 @@ public class ui_manager : MonoBehaviour
         Readfile.Close();
 
         Rank.Sort();
-        for(int i=0;i<5;i++){
-            Debug.Log(Rank[i]);
-        }
+
         FileStream  f = new FileStream( m_strPath  + "RankInfo"+Stage.text+".txt", FileMode.Truncate, FileAccess.Write);
         //정렬된 정렬된 벡터를 다시 파일에 다시 써주기!
         StreamWriter writer = new StreamWriter(f, System.Text.Encoding.Unicode);
