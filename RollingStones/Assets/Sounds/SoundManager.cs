@@ -31,19 +31,6 @@ public class SoundManager : MonoBehaviour
         MyAudio.Play();
     }
 
-    public void PlayBallSound()
-    {
-        
-        if (isPlaying == false)
-        {
-            isPlaying = true;
-            //MyAudio.PlayOneShot(BallSound,0.3f);
-        }
-
-        isPlaying = false;
-
-    }
-
     public void PlayJumpSound()
     {
         MyAudio.PlayOneShot(JumpSound);

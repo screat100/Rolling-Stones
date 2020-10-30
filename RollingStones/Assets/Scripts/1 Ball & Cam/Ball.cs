@@ -84,15 +84,6 @@ public class Ball : MonoBehaviour
             SoundManager.Instance.PlayWallSound(); //벽 부딪혔을 때 소리 재생
         }
 
-
-        if (other.gameObject.tag == "ground")
-        {
-            if (rb.velocity.magnitude > 0)
-            {
-                SoundManager.Instance.PlayBallSound();
-            }
-        }
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -118,11 +109,6 @@ public class Ball : MonoBehaviour
         {
             canMove = true;
             canJump = true;
-
-            if (speedRate> 1.0f)
-            {
-                SoundManager.Instance.PlayBallSound();
-            }
         }
 
     }

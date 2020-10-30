@@ -34,6 +34,8 @@ public class SceneManage : MonoBehaviour
     public void GoToSelectStage()
     {
         SceneManager.LoadScene("SelectStage");
+        
+        //Destroy(Ghost.Instance); Destroy(Ghost2.Instance2); Destroy(Ghost3.Instance3); Destroy(Ghost4.Instance4);
     }
     public void GoToTestStage()
     {

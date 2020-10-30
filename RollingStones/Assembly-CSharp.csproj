@@ -74,10 +74,10 @@
     <Compile Include="Assets\Scripts\3 Door\DoorStat.cs" />
     <Compile Include="Assets\Scripts\4 UI &amp; Scene\SceneManage.cs" />
     <Compile Include="Assets\Scripts\4 UI &amp; Scene\ui_manager.cs" />
-    <Compile Include="Assets\Scripts\5 Director\Ghost.cs" />
-    <Compile Include="Assets\Scripts\5 Director\Ghost2.cs" />
-    <Compile Include="Assets\Scripts\5 Director\Ghost3.cs" />
-    <Compile Include="Assets\Scripts\5 Director\Ghost4.cs" />
+    <Compile Include="Assets\Scripts\5 Director\GhostPlay\Ghost.cs" />
+    <Compile Include="Assets\Scripts\5 Director\GhostPlay\Ghost2.cs" />
+    <Compile Include="Assets\Scripts\5 Director\GhostPlay\Ghost3.cs" />
+    <Compile Include="Assets\Scripts\5 Director\GhostPlay\Ghost4.cs" />
     <Compile Include="Assets\Scripts\5 Director\fadeinout.cs" />
     <Compile Include="Assets\Scripts\6 Data\RankManagement.cs" />
     <Compile Include="Assets\Scripts\6 Data\Record.cs" />
