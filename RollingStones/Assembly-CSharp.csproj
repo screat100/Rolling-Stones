@@ -71,9 +71,13 @@
     <Compile Include="Assets\Scripts\2 Obstacle Prefab\propeller.cs" />
     <Compile Include="Assets\Scripts\2 Obstacle Prefab\wing.cs" />
     <Compile Include="Assets\Scripts\3 Door\DoorHPSlider.cs" />
+    <Compile Include="Assets\Scripts\3 Door\DoorStat.cs" />
     <Compile Include="Assets\Scripts\4 UI &amp; Scene\SceneManage.cs" />
     <Compile Include="Assets\Scripts\4 UI &amp; Scene\ui_manager.cs" />
     <Compile Include="Assets\Scripts\5 Director\Ghost.cs" />
+    <Compile Include="Assets\Scripts\5 Director\Ghost2.cs" />
+    <Compile Include="Assets\Scripts\5 Director\Ghost3.cs" />
+    <Compile Include="Assets\Scripts\5 Director\Ghost4.cs" />
     <Compile Include="Assets\Scripts\5 Director\fadeinout.cs" />
     <Compile Include="Assets\Scripts\6 Data\RankManagement.cs" />
     <Compile Include="Assets\Scripts\6 Data\Record.cs" />
@@ -86,31 +90,31 @@
     <None Include="Assets\RankInfo\RankInfoStage3.txt" />
     <None Include="Assets\RankInfo\RankInfoStage4.txt" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Users/pjhoo/OneDrive/문서/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>C:/Users/pjhoo/OneDrive/문서/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/pjhoo/OneDrive/문서/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/pjhoo/OneDrive/문서/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Users/pjhoo/OneDrive/문서/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/pjhoo/OneDrive/문서/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:/Users/pjhoo/OneDrive/문서/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/pjhoo/OneDrive/문서/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/pjhoo/OneDrive/문서/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/Hong/Documents/GitHub/Rolling-Stones/RollingStones/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

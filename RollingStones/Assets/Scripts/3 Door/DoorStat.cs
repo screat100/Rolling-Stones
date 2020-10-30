@@ -21,7 +21,14 @@ public class DoorStat : MonoBehaviour
         if(HP <= 0 && !FindObjectOfType<ui_manager>().isStageOver)
         {
             FindObjectOfType<ui_manager>().stageClear();
-            FindObjectOfType<Ghost>().CheckGhost();
+            if(FindObjectOfType<ui_manager>().stage==1)
+                FindObjectOfType<Ghost>().CheckGhost();
+            else if (FindObjectOfType<ui_manager>().stage == 2)
+                FindObjectOfType<Ghost2>().CheckGhost2();
+            else if (FindObjectOfType<ui_manager>().stage == 3)
+                FindObjectOfType<Ghost3>().CheckGhost3();
+            else if (FindObjectOfType<ui_manager>().stage == 4)
+                FindObjectOfType<Ghost4>().CheckGhost4();
         }    
     }
 
