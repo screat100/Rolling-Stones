@@ -21,7 +21,7 @@ public class DoorStat : MonoBehaviour
         if(HP <= 0 && !FindObjectOfType<ui_manager>().isStageOver)
         {
             FindObjectOfType<ui_manager>().stageClear();
-            FindObjectOfType<Ghost>().StopRecordingGhost();
+            FindObjectOfType<Ghost2>().CheckGhost();
         }    
     }
 
