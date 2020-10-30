@@ -38016,7 +38016,7 @@ PrefabInstance:
     - target: {fileID: 1269953200433901840, guid: 6569712e9a3d0784c8b74eecdf153ddc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -382.4
+      value: -383.5
       objectReference: {fileID: 0}
     - target: {fileID: 1269953200433901840, guid: 6569712e9a3d0784c8b74eecdf153ddc,
         type: 3}
@@ -38071,12 +38071,12 @@ PrefabInstance:
     - target: {fileID: 1269953200433901840, guid: 6569712e9a3d0784c8b74eecdf153ddc,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1269953200433901840, guid: 6569712e9a3d0784c8b74eecdf153ddc,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6526541149554353745, guid: 6569712e9a3d0784c8b74eecdf153ddc,
         type: 3}
@@ -39049,6 +39049,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3835960609641937243, guid: 663293c1fdd475743853794c47720338,
+        type: 3}
+      propertyPath: JumpPadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8a630e143a9c39b41a1e98e0f156ffd6, type: 3}
     - target: {fileID: 4886482206623971637, guid: 663293c1fdd475743853794c47720338,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -39132,7 +39137,7 @@ MonoBehaviour:
   SwampSound: {fileID: 8300000, guid: 8f15db0e6a90d5d4b8157faba165125c, type: 3}
   BoosterSound: {fileID: 8300000, guid: 3e51636fab6080a489f37864d321a280, type: 3}
   PropellerSound: {fileID: 0}
-  BallSound: {fileID: 0}
+  JumpPadSound: {fileID: 0}
   isPlaying: 0
 --- !u!81 &1302804949
 AudioListener:

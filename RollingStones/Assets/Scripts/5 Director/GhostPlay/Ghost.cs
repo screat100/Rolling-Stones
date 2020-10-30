@@ -98,7 +98,7 @@ public class Ghost : MonoBehaviour
         //고스트가 활성화되어있다면
         if (isGhostActivate)
         {
-            if (!FindObjectOfType<ui_manager>().isStageOver)
+            if (!FindObjectOfType<ui_manager>().isStageOver )
             {
                 {
                     gameObject.transform.position = (Vector3)ghostPos[move];

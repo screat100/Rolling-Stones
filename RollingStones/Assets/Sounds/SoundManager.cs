@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
 
-    public AudioClip JumpSound, DoorSound, MainMusic, FallSound, WallSound, SwampSound, BoosterSound, PropellerSound, BallSound;
+    public AudioClip JumpSound, DoorSound, MainMusic, FallSound, WallSound, SwampSound, BoosterSound, PropellerSound, JumpPadSound;
     AudioSource MyAudio;
     public static SoundManager Instance;
     public bool isPlaying;
@@ -61,6 +61,11 @@ public class SoundManager : MonoBehaviour
     public void PlayPropellerSound()
     {
         MyAudio.PlayOneShot(PropellerSound);
+    }
+
+    public void PlayJumpPadSound()
+    {
+        MyAudio.PlayOneShot(JumpPadSound);
     }
 
 

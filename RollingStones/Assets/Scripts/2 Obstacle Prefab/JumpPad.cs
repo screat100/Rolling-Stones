@@ -19,6 +19,8 @@ public class JumpPad : MonoBehaviour
             // 점프대 작동 중에는 플레이어의 움직임 제한
             other.GetComponent<Ball>().canMove = false;
             other.GetComponent<Ball>().canJump = false;
+
+            FindObjectOfType<SoundManager>().PlayJumpPadSound();
         }
     }
 }

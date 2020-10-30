@@ -71,13 +71,13 @@ public class ui_manager : MonoBehaviour
         else if (time <= starTime2) star = "★★☆☆☆";
         else star = "★☆☆☆☆";
 
+
         ResultPopup.SetActive(true);
         ResultPopup.transform.Find("Time").GetComponent<Text>().text = TimeUI.text;
         ResultPopup.transform.Find("Star").GetComponent<Text>().text = star;
 
         /* 결과데이터 저장 */
         InputRank(StageNumber,time);
-        //Ghost.Instance.CheckGhost();
     }
 
     public void DamageFontOn(float damage)
